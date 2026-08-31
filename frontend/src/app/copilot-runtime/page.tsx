@@ -107,9 +107,10 @@ export default function Page() {
           <Callout tone="warn" title="`npm install @ag-ui/client` picks the wrong version">
             Both this page and the direct-connection snippet tell you to import{" "}
             <code>HttpAgent</code> from <code>@ag-ui/client</code> without
-            naming a version. <code>@copilotkit/runtime</code> 1.69.2 pins{" "}
-            <code>@ag-ui/client</code> 0.0.57 internally, so installing the
-            current 0.0.58 at the top level gives you two copies and passing an{" "}
+            naming a version. <code>@copilotkit/runtime</code> 1.69.2 bundles{" "}
+            <code>@ag-ui/client</code> 0.0.57 internally, so installing whatever{" "}
+            <code>latest</code> currently is at the top level — 0.0.58 when this
+            was found, 0.0.59 a day later — gives you two copies, and passing an{" "}
             <code>HttpAgent</code> into <code>CopilotRuntime</code> fails with{" "}
             <em>
               Type &apos;HttpAgent&apos; is not assignable to type
