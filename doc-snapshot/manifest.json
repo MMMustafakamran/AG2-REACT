@@ -1,0 +1,395 @@
+{
+  "schema": 1,
+  "docsRoot": "https://docs.copilotkit.ai/ag2",
+  "syncedAt": "2026-08-31T19:25:18.173Z",
+  "pages": {
+    "/ag2": {
+      "file": "ag2.md",
+      "sha256": "f07245724bcb568a4d6b950576e93002ab30fc045a3ac6082846b7e04d7f0fbb",
+      "bytes": 3121,
+      "lines": 57,
+      "routes": [
+        "/",
+        "/doc-sync"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:19 GMT"
+    },
+    "/ag2/ag-ui": {
+      "file": "ag2__ag-ui.md",
+      "sha256": "7a2cb987baf2819e6694b90f67ca298ce401fbf37e56d5787ab6ed5310e802c7",
+      "bytes": 3920,
+      "lines": 124,
+      "routes": [
+        "/ag-ui"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/auth": {
+      "file": "ag2__auth.md",
+      "sha256": "ca3656d03ba75260eb585ea357fa5328cb564397e314c70bac2e1e33eac47ddb",
+      "bytes": 6658,
+      "lines": 226,
+      "routes": [
+        "/auth"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/copilot-runtime": {
+      "file": "ag2__copilot-runtime.md",
+      "sha256": "88197c47098263fcd92317c086fa1a07ae093d0e8cbedb01f943c9314d661805",
+      "bytes": 8067,
+      "lines": 211,
+      "routes": [
+        "/copilot-runtime"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/custom-look-and-feel/headless-ui": {
+      "file": "ag2__custom-look-and-feel__headless-ui.md",
+      "sha256": "16e83023e7c73841f0ac77450c02287be3bdd31b2be81d670dcb601f2e52ada5",
+      "bytes": 4507,
+      "lines": 167,
+      "routes": [
+        "/custom-look-and-feel/headless-ui"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/custom-look-and-feel/slots": {
+      "file": "ag2__custom-look-and-feel__slots.md",
+      "sha256": "b03880eee02e91ff61fa3a8e6531a5ad5cae7faad6e67187fec0d464cf5d374a",
+      "bytes": 10397,
+      "lines": 315,
+      "routes": [
+        "/custom-look-and-feel/slots"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/frontend-tools": {
+      "file": "ag2__frontend-tools.md",
+      "sha256": "f8d18bdc623ed348946323b3359c3bb7c2a52e847bea23885a20574387801adb",
+      "bytes": 4745,
+      "lines": 128,
+      "routes": [
+        "/frontend-tools"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/generative-ui/state-rendering": {
+      "file": "ag2__generative-ui__state-rendering.md",
+      "sha256": "a2e98ccfb87f0e844fb49bbc11d49cb7f164209fcef0cba0743ab4224b9e1762",
+      "bytes": 6632,
+      "lines": 219,
+      "routes": [
+        "/generative-ui/state-rendering"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/generative-ui/tool-rendering": {
+      "file": "ag2__generative-ui__tool-rendering.md",
+      "sha256": "bd107903cc1eba34b29e0c8d912255f4779ba224785cf2ac5b61ef1272beab1b",
+      "bytes": 5167,
+      "lines": 169,
+      "routes": [
+        "/generative-ui/tool-rendering"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/generative-ui/your-components/display-only": {
+      "file": "ag2__generative-ui__your-components__display-only.md",
+      "sha256": "880fe95dbf752b2d60a87769957d91ab4e77a06a115161029175df3dd3618487",
+      "bytes": 2475,
+      "lines": 90,
+      "routes": [
+        "/generative-ui/your-components/display-only"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/generative-ui/your-components/interactive": {
+      "file": "ag2__generative-ui__your-components__interactive.md",
+      "sha256": "2dbe08c908e7d5df8d468f40d57b1220b8c6d1bbe1ddbcc3bf96058b497d306f",
+      "bytes": 2654,
+      "lines": 73,
+      "routes": [
+        "/generative-ui/your-components/interactive"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/headless-threads": {
+      "file": "ag2__headless-threads.md",
+      "sha256": "96d9b34a9bba5284721bf705063187a31d27503336ce44c15bee6cd7576800ea",
+      "bytes": 10012,
+      "lines": 208,
+      "routes": [
+        "/headless-threads"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/inspector": {
+      "file": "ag2__inspector.md",
+      "sha256": "ca89327592f1102fdb3a47e876c926958e987e433cd33eb9bebf3bc10923376e",
+      "bytes": 5956,
+      "lines": 127,
+      "routes": [
+        "/inspector"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/prebuilt-components": {
+      "file": "ag2__prebuilt-components.md",
+      "sha256": "06e832685624bfafe11def88d1c93911905a00c37178502e0ea754e62fbaca0e",
+      "bytes": 3208,
+      "lines": 131,
+      "routes": [
+        "/prebuilt-components"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/prebuilt-components/copilot-threads-drawer": {
+      "file": "ag2__prebuilt-components__copilot-threads-drawer.md",
+      "sha256": "292d4bd0f23c13e0f10522eeb4ae2f027041bb437ae7a76f2d82502c9d4fcfdb",
+      "bytes": 6207,
+      "lines": 142,
+      "routes": [
+        "/prebuilt-components/copilot-threads-drawer"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/programmatic-control": {
+      "file": "ag2__programmatic-control.md",
+      "sha256": "72bda00a749f215f30de4271e7cffe699105955cc187707641c6d2a5c5b2d689",
+      "bytes": 13316,
+      "lines": 475,
+      "routes": [
+        "/programmatic-control"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+    },
+    "/ag2/quickstart": {
+      "file": "ag2__quickstart.md",
+      "sha256": "6f3f64027cb21a1381c5b683f6f62fd575f495d6379888e5ab8d5e0a5b7af755",
+      "bytes": 4640,
+      "lines": 155,
+      "routes": [
+        "/quickstart"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+    },
+    "/ag2/readables": {
+      "file": "ag2__readables.md",
+      "sha256": "54b2650c826de8a99205ae29388d93e5d2367ab2c3ad127294b0eb8abb210e0b",
+      "bytes": 10640,
+      "lines": 239,
+      "routes": [
+        "/readables"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+    },
+    "/ag2/shared-state/read": {
+      "file": "ag2__shared-state__read.md",
+      "sha256": "bcbc9f8a4cf74fe3b291583d6a9ebd17294b1acc15847f301324e4da4646412c",
+      "bytes": 6016,
+      "lines": 182,
+      "routes": [
+        "/shared-state/read"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+    },
+    "/ag2/shared-state/write": {
+      "file": "ag2__shared-state__write.md",
+      "sha256": "4f7393ec2becd2ac6e95a672bb7e61686d35722d58575000dc0553cff477db31",
+      "bytes": 6227,
+      "lines": 189,
+      "routes": [
+        "/shared-state/write"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+    },
+    "/ag2/threads": {
+      "file": "ag2__threads.md",
+      "sha256": "b9aa3e51e01fc9738864011327f74b66d058b715a9230b598a134835cbba8b80",
+      "bytes": 11839,
+      "lines": 211,
+      "routes": [
+        "/threads"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+    },
+    "/ag2/threads-lifecycle": {
+      "file": "ag2__threads-lifecycle.md",
+      "sha256": "3b0a0e9844372482465ceafbdcd40bfc2207bc6f416eb6f4c4f14dc588f69bad",
+      "bytes": 15689,
+      "lines": 257,
+      "routes": [
+        "/threads-lifecycle"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+    }
+  },
+  "sitemap": {
+    "fetchedAt": "2026-08-31T19:25:18.173Z",
+    "urlsUnderRoot": 138,
+    "knownUnmapped": [
+      "https://docs.copilotkit.ai/ag2/agent-config",
+      "https://docs.copilotkit.ai/ag2/agent-spec",
+      "https://docs.copilotkit.ai/ag2/agent-spec/human-in-the-loop",
+      "https://docs.copilotkit.ai/ag2/agent-spec/langgraph",
+      "https://docs.copilotkit.ai/ag2/agent-spec/quickstart",
+      "https://docs.copilotkit.ai/ag2/agent-spec/wayflow",
+      "https://docs.copilotkit.ai/ag2/agentic-chat-ui",
+      "https://docs.copilotkit.ai/ag2/agentic-protocols",
+      "https://docs.copilotkit.ai/ag2/agentic-protocols/a2a",
+      "https://docs.copilotkit.ai/ag2/agentic-protocols/ag-ui",
+      "https://docs.copilotkit.ai/ag2/agentic-protocols/ag-ui-middleware",
+      "https://docs.copilotkit.ai/ag2/agentic-protocols/mcp",
+      "https://docs.copilotkit.ai/ag2/backend/ag-ui",
+      "https://docs.copilotkit.ai/ag2/backend/agent-runner",
+      "https://docs.copilotkit.ai/ag2/backend/copilot-runtime",
+      "https://docs.copilotkit.ai/ag2/backend/custom-agent",
+      "https://docs.copilotkit.ai/ag2/backend/runtime-endpoints",
+      "https://docs.copilotkit.ai/ag2/backend/self-managed-agents",
+      "https://docs.copilotkit.ai/ag2/build-with-agents",
+      "https://docs.copilotkit.ai/ag2/built-in-agent",
+      "https://docs.copilotkit.ai/ag2/cli",
+      "https://docs.copilotkit.ai/ag2/concepts/architecture",
+      "https://docs.copilotkit.ai/ag2/concepts/generative-ui-overview",
+      "https://docs.copilotkit.ai/ag2/concepts/oss-vs-enterprise",
+      "https://docs.copilotkit.ai/ag2/concepts/which-hook",
+      "https://docs.copilotkit.ai/ag2/contributing/code-contributions",
+      "https://docs.copilotkit.ai/ag2/contributing/code-contributions/package-linking",
+      "https://docs.copilotkit.ai/ag2/contributing/docs-contributions",
+      "https://docs.copilotkit.ai/ag2/cookbook",
+      "https://docs.copilotkit.ai/ag2/cookbook/angular-adk-agentic-app",
+      "https://docs.copilotkit.ai/ag2/cookbook/arcade",
+      "https://docs.copilotkit.ai/ag2/cookbook/claude-managed-agents",
+      "https://docs.copilotkit.ai/ag2/cookbook/daytona",
+      "https://docs.copilotkit.ai/ag2/cookbook/openbox-governed-copilotkit",
+      "https://docs.copilotkit.ai/ag2/cookbook/oracle-agent-spec-memory",
+      "https://docs.copilotkit.ai/ag2/custom-look-and-feel/css",
+      "https://docs.copilotkit.ai/ag2/custom-look-and-feel/reasoning-messages",
+      "https://docs.copilotkit.ai/ag2/deepagents",
+      "https://docs.copilotkit.ai/ag2/deploy/agentcore",
+      "https://docs.copilotkit.ai/ag2/deploy/aws-lambda",
+      "https://docs.copilotkit.ai/ag2/deploy/langsmith",
+      "https://docs.copilotkit.ai/ag2/examples",
+      "https://docs.copilotkit.ai/ag2/faq",
+      "https://docs.copilotkit.ai/ag2/generative-ui",
+      "https://docs.copilotkit.ai/ag2/generative-ui/a2ui",
+      "https://docs.copilotkit.ai/ag2/generative-ui/a2ui/dynamic-schema",
+      "https://docs.copilotkit.ai/ag2/generative-ui/a2ui/fixed-schema",
+      "https://docs.copilotkit.ai/ag2/generative-ui/display",
+      "https://docs.copilotkit.ai/ag2/generative-ui/hashbrown",
+      "https://docs.copilotkit.ai/ag2/generative-ui/interactive",
+      "https://docs.copilotkit.ai/ag2/generative-ui/json-render",
+      "https://docs.copilotkit.ai/ag2/generative-ui/mcp-apps",
+      "https://docs.copilotkit.ai/ag2/generative-ui/open-generative-ui",
+      "https://docs.copilotkit.ai/ag2/generative-ui/open-json-ui",
+      "https://docs.copilotkit.ai/ag2/generative-ui/reasoning",
+      "https://docs.copilotkit.ai/ag2/generative-ui/tool-based",
+      "https://docs.copilotkit.ai/ag2/headless",
+      "https://docs.copilotkit.ai/ag2/human-in-the-loop",
+      "https://docs.copilotkit.ai/ag2/human-in-the-loop/headless",
+      "https://docs.copilotkit.ai/ag2/human-in-the-loop/useInterrupt",
+      "https://docs.copilotkit.ai/ag2/migrate/1.10.X",
+      "https://docs.copilotkit.ai/ag2/migrate/1.8.2",
+      "https://docs.copilotkit.ai/ag2/migrate/v2",
+      "https://docs.copilotkit.ai/ag2/multi-agent/subagents",
+      "https://docs.copilotkit.ai/ag2/multimodal-attachments",
+      "https://docs.copilotkit.ai/ag2/prebuilt-components/chat",
+      "https://docs.copilotkit.ai/ag2/prebuilt-components/chat-controls",
+      "https://docs.copilotkit.ai/ag2/prebuilt-components/popup",
+      "https://docs.copilotkit.ai/ag2/prebuilt-components/sidebar",
+      "https://docs.copilotkit.ai/ag2/premium/connect-your-runtime",
+      "https://docs.copilotkit.ai/ag2/premium/headless-ui",
+      "https://docs.copilotkit.ai/ag2/premium/intelligence-platform",
+      "https://docs.copilotkit.ai/ag2/premium/managed-intelligence-platform",
+      "https://docs.copilotkit.ai/ag2/premium/overview",
+      "https://docs.copilotkit.ai/ag2/premium/self-hosting",
+      "https://docs.copilotkit.ai/ag2/premium/threads-explained",
+      "https://docs.copilotkit.ai/ag2/reference/v2/hooks/useCapabilities",
+      "https://docs.copilotkit.ai/ag2/runtime-server-adapter",
+      "https://docs.copilotkit.ai/ag2/shared-state",
+      "https://docs.copilotkit.ai/ag2/shared-state/agent-readonly",
+      "https://docs.copilotkit.ai/ag2/shared-state/rendering-in-app",
+      "https://docs.copilotkit.ai/ag2/shared-state/streaming",
+      "https://docs.copilotkit.ai/ag2/telemetry",
+      "https://docs.copilotkit.ai/ag2/threads-import",
+      "https://docs.copilotkit.ai/ag2/threads-self-managed",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/common-issues",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/debug-mode",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/error-debugging",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/error-reference",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/event-inspector",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/hook-explorer",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/inspector-dev-console",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/migrate-to-1.10.X",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/migrate-to-1.8.2",
+      "https://docs.copilotkit.ai/ag2/troubleshooting/migrate-to-v2",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-powered-textarea/next-steps",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-powered-textarea/overview",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-powered-textarea/step-1-checkout-repo",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-powered-textarea/step-2-setup-copilotkit",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-powered-textarea/step-3-copilot-textarea",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-powered-textarea/step-4-copilot-readable-state",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-todo-app/next-steps",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-todo-app/overview",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-todo-app/step-1-checkout-repo",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-todo-app/step-2-setup-copilotkit",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-todo-app/step-3-copilot-readable-state",
+      "https://docs.copilotkit.ai/ag2/tutorials/ai-todo-app/step-4-frontend-tools",
+      "https://docs.copilotkit.ai/ag2/tutorials/multi-conversation-chat",
+      "https://docs.copilotkit.ai/ag2/voice",
+      "https://docs.copilotkit.ai/ag2/vs-code-extension",
+      "https://docs.copilotkit.ai/ag2/whats-new",
+      "https://docs.copilotkit.ai/ag2/whats-new/a2a-mcp-handshake",
+      "https://docs.copilotkit.ai/ag2/whats-new/a2ui-launch",
+      "https://docs.copilotkit.ai/ag2/whats-new/generative-ui-spec-support",
+      "https://docs.copilotkit.ai/ag2/whats-new/langgraph-deep-agents",
+      "https://docs.copilotkit.ai/ag2/whats-new/mcp-apps-support",
+      "https://docs.copilotkit.ai/ag2/whats-new/v1-50"
+    ]
+  }
+}
