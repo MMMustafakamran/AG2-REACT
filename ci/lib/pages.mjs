@@ -43,6 +43,35 @@ export const PAGE_GROUPS = {
   backend: ['copilot-runtime', 'ag-ui'],
 };
 
+/**
+ * TEMPORARY -- record no page that comes after this one.
+ *
+ * The suite is ordered as the docs are, so truncating here records the
+ * Getting Started run (quickstart, prebuilt-components, prebuilt-error) and
+ * stops. Set to `null` to restore the full suite; that one line is the whole
+ * switch, and nothing else in this file or the workflow needs touching.
+ */
+export const RECORD_UNTIL = 'prebuilt-error';
+
+/**
+ * The page ids this run is allowed to record: every page up to and including
+ * RECORD_UNTIL, or all of them when it is null.
+ */
+export function recordablePageIds() {
+  const ordered = readPageIds();
+  if (!RECORD_UNTIL) return ordered;
+
+  const cut = ordered.indexOf(RECORD_UNTIL);
+  if (cut === -1) {
+    throw new Error(
+      `RECORD_UNTIL is '${RECORD_UNTIL}', which is not a page id.
+` +
+        `Valid ids: ${ordered.join(', ')}`,
+    );
+  }
+  return ordered.slice(0, cut + 1);
+}
+
 export function readPageIds() {
   let src;
   try {
@@ -137,5 +166,38 @@ export function resolveSelection({ pages = '', groups = [] } = {}) {
   const selected = new Set([...explicit, ...fromGroups]);
 
   // Preserve the recorder's declared order so shards stay predictable.
-  return readPageIds().filter((id) => selected.has(id));
+  const allowed = recordablePageIds();
+
+  // Nothing selected normally means "record everything", expressed as an empty
+  // list. While RECORD_UNTIL is set that is no longer true, so the allowed list
+  // is spelled out rather than left implicit -- the shards must be told which
+  // pages exist for them, not left to record the whole suite.
+  if (selected.size === 0) {
+    return RECORD_UNTIL ? allowed : [];
+  }
+
+  const kept = allowed.filter((id) => selected.has(id));
+
+  // An empty list means "record everything" to the caller, so a selection that
+  // RECORD_UNTIL emptied out must fail rather than return one -- otherwise
+  // asking for `--groups=threads` while truncated would record the whole suite,
+  // which is the exact opposite of what was asked for.
+  if (kept.length === 0) {
+    throw new Error(
+      `Every page selected comes after RECORD_UNTIL ('${RECORD_UNTIL}'), so there is ` +
+        `nothing to record.
+Selected: ${[...selected].join(', ')}
+` +
+        `Recordable right now: ${allowed.join(', ')}`,
+    );
+  }
+
+  const dropped = [...selected].filter((id) => !kept.includes(id));
+  if (dropped.length > 0) {
+    console.error(
+      `⚠️ Skipping ${dropped.join(', ')} — after RECORD_UNTIL ('${RECORD_UNTIL}').`,
+    );
+  }
+
+  return kept;
 }

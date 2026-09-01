@@ -19,7 +19,13 @@ import { AUDIO_DIR, VIDEOS_DIR } from './config.mjs';
  * Which audio track belongs to which video. Match is done on the video
  * filename, which carries the demo name (e.g. `AG2-react-14-Readables.webm`).
  */
-const AUDIO_TRACKS = [{ audioFile: 'readables mspy.m4a', videoMatch: 'Readables' }];
+const AUDIO_TRACKS = [
+  { audioFile: 'readables mspy.m4a', videoMatch: 'Readables' },
+  // Matched on the full stem, not 'PrebuiltComponents': that shorter string is
+  // a prefix of this clip's own name, so it would also catch the working
+  // Prebuilt Components video and narrate it with the build failure.
+  { audioFile: 'ag2 prebuilt error.m4a', videoMatch: 'PrebuiltComponentsBuildError' },
+];
 
 function hasFfmpeg() {
   try {
