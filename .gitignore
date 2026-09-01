@@ -52,3 +52,7 @@ frontend/VERSIONS.md
 # only: the voiceover assets in autorecorder/audio/ are .m4a and ARE committed.
 *.webm
 *.mp4
+
+# The captured build output the Prebuilt Components failure clip replays. It is
+# evidence, not a run artifact, so it overrides the *.log rule above.
+!prior-testing/**/BUILD-ERROR.log

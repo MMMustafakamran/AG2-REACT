@@ -70,6 +70,44 @@ export const PAGES = definePages([
     waitAfterPromptMs: 1500,
   },
   {
+    // The same doc page followed in the app the Quickstart tells you to clone.
+    // Sits next to `prebuilt-components` because the two are the two ways of
+    // following one page: by hand in a Tailwind v4 app, which works, and in
+    // ag2-samples, which is Tailwind v3 and stops on the Setup step.
+    id: 'prebuilt-error',
+    name: 'Prebuilt Components - setup step breaks the build',
+    videoName: 'PrebuiltComponentsBuildError',
+    docPath: 'prebuilt-components',
+    route: 'prebuilt-components/build-failure',
+    // Versions first, same as the Quickstart clip: the tailwind v3 / v4 split
+    // listed here IS the error, so the frame that explains the failure comes
+    // before the failure itself.
+    ideFile: 'prior-testing/ag2-samples/VERSIONS.md',
+    startLine: 7,
+    endLine: 25,
+    extraTabs: [
+      {
+        // The sample's own pins -- tailwindcss ^3.4.1 on line 29.
+        filePath: 'prior-testing/ag2-samples/ui/package.json',
+        startLine: 10,
+        endLine: 31,
+      },
+      {
+        // Line 6 is the Prebuilt Components page's Setup step, added verbatim.
+        filePath: 'prior-testing/ag2-samples/ui/app/layout.tsx',
+        startLine: 1,
+        endLine: 8,
+      },
+    ],
+    // Not sent to a chat -- this page has none. `core/doctor.ts` requires every
+    // page to declare a non-empty prompt, an assumption that holds for the
+    // other twenty and not for this one; noted rather than patched out of
+    // frozen code. This is the line the clip is about.
+    prompt: 'import "@copilotkit/react-core/v2/styles.css"',
+    // Doubles as the Notepad dwell: how long the finished note stays up.
+    waitAfterPromptMs: 7000,
+  },
+  {
     id: 'slots',
     name: 'Custom Look and Feel - Slots',
     videoName: 'Slots',

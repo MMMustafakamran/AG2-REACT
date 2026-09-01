@@ -37,6 +37,7 @@ import { runHeadlessUiAction } from './headless-ui.action';
 import { runHitlAction } from './hitl.action';
 import { runInspectorAction } from './inspector.action';
 import { runPrebuiltAction } from './prebuilt.action';
+import { runPrebuiltErrorAction } from './prebuilt-error.action';
 import { runProgrammaticAction } from './programmatic.action';
 import { runRuntimeAction } from './runtime.action';
 import {
@@ -56,6 +57,7 @@ import { runToolRenderingAction } from './tool-rendering.action';
 export const ACTION_MAP: Record<string, PageActionHandler> = {
   quickstart: runStandardAction,
   'prebuilt-components': runPrebuiltAction,
+  'prebuilt-error': runPrebuiltErrorAction,
   slots: runSlotsAction,
   'headless-ui': runHeadlessUiAction,
   'programmatic-control': runProgrammaticAction,

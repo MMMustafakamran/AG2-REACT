@@ -1,0 +1,37 @@
+   ▲ Next.js 15.5.12
+
+   Creating an optimized production build ...
+ ⚠ Compiled with warnings in 69s
+
+./node_modules/@whatwg-node/fetch/dist/node-ponyfill.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+./node_modules/@whatwg-node/fetch/dist/node-ponyfill.js
+./node_modules/graphql-yoga/esm/server.js
+./node_modules/graphql-yoga/esm/index.js
+./node_modules/@copilotkit/runtime/dist/index.mjs
+./app/api/copilotkit/route.ts
+
+(node:14892) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ✓ Compiled successfully in 118s
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/api/copilotkit/route.ts:13:5
+Type error: Type 'HttpAgent' is not assignable to type 'AbstractAgent'.
+  Types of property 'messages' are incompatible.
+    Type '({ role: "developer"; content: string; id: string; name?: string | undefined; encryptedValue?: string | undefined; } | { role: "system"; content: string; id: string; name?: string | undefined; encryptedValue?: string | undefined; } | ... 4 more ... | { ...; })[]' is not assignable to type    … [truncated — 623 chars]
+      Type '{ role: "developer"; content: string; id: string; name?: string | undefined; encryptedValue?: string | undefined; } | { role: "system"; content: string; id: string; name?: string | undefined; encryptedValue?: string | undefined; } | ... 4 more ... | { ...; }' is not assignable to type '{   … [truncated — 620 chars]
+        Type '{ role: "reasoning"; content: string; id: string; encryptedValue?: string | undefined; }' is not assignable to type '{ id: string; role: "developer"; content: string; name?: string | undefined; } | { id: string; role: "system"; content: string; name?: string | undefined; } | { id: stri   … [truncated — 452 chars]
+          Property 'activityType' is missing in type '{ role: "reasoning"; content: string; id: string; encryptedValue?: string | undefined; }' but required in type '{ id: string; role: "activity"; content: Record<string, any>; activityType: string; }'.
+
+  11 | const runtime = new CopilotRuntime({
+  12 |   agents: {
+> 13 |     weather_agent: agent,
+     |     ^
+  14 |   },
+  15 | });
+  16 |
+Next.js build worker exited with code: 1 and signal: null

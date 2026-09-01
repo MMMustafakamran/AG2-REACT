@@ -45,7 +45,14 @@ export interface SelectorContract {
    */
   assistantMessage: string;
 
-  /** Any of these appearing means the demo has rendered enough to drive. */
+  /**
+   * Any of these appearing means the demo has rendered enough to drive.
+   *
+   * Every entry but the first describes a chat surface. `[data-demo-ready]` is
+   * the escape hatch for a demo that is not a chat at all — the CLI build
+   * failure replays a terminal — and it is opt-in, so adding it here does not
+   * loosen what the other twenty pages must render before the recorder acts.
+   */
   chatReady: string;
 
   /** Doc page has painted enough to start reading. */
@@ -69,7 +76,7 @@ export const SELECTORS: SelectorContract = {
     '.copilotKitAssistantMessage, [data-message-role="assistant"], .copilotKitMessage:not(:first-child), [class*="assistant"]',
 
   chatReady:
-    'textarea, input[type="text"], input, [contenteditable="true"], .copilotKitChat, [class*="copilotKit"]',
+    '[data-demo-ready="true"], textarea, input[type="text"], input, [contenteditable="true"], .copilotKitChat, [class*="copilotKit"]',
 
   docContentReady: 'h1, article, main, [class*="content"], pre',
 

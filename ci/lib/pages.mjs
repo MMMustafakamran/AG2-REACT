@@ -29,7 +29,7 @@ const PAGES_CONFIG = path.join(RECORDER_DIR, 'config', 'pages.config.ts');
  * the dispatch form.
  */
 export const PAGE_GROUPS = {
-  getting_started: ['quickstart', 'prebuilt-components'],
+  getting_started: ['quickstart', 'prebuilt-components', 'prebuilt-error'],
   custom_look: ['slots', 'headless-ui', 'programmatic-control', 'inspector'],
   generative_ui: ['display-only', 'interactive', 'tool-rendering', 'state-rendering'],
   app_control: [
