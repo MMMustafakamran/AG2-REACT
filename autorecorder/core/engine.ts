@@ -400,9 +400,12 @@ export class RecordingEngine {
           }
         }
 
-        // Switch back to Chrome via Windows 11 Taskbar
-        console.log(`   🖱️ Switching back to Chrome via Windows 11 Taskbar...`);
-        await clickTaskbarApp(page, 'chrome');
+        // Switch back to the demo's own app via the Windows 11 Taskbar
+        const demoApp = config.demoApp ?? 'chrome';
+        console.log(
+          `   🖱️ Switching back to ${demoApp === 'terminal' ? 'Windows Terminal' : 'Chrome'} via Windows 11 Taskbar...`,
+        );
+        await clickTaskbarApp(page, demoApp);
       } catch (e) {
         // The IDE view is generated from local files, so a failure here is a real
         // defect in this repo -- never a flaky-network excuse.
@@ -443,7 +446,7 @@ export class RecordingEngine {
         // when it hydrates -- but the guard inside ensureOverlays re-attaches
         // them. No wait here: nothing scrolls this page, and if hydration has
         // already finished the probe would never fire and just burn its timeout.
-        await ensureOverlays(page, 'chrome');
+        await ensureOverlays(page, config.demoApp ?? 'chrome');
 
         // Wait for page body and chat element readiness
         console.log(`   ⏳ Waiting for Next.js compilation & React hydration to settle...`);

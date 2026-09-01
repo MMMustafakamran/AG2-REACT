@@ -79,6 +79,9 @@ export const PAGES = definePages([
     videoName: 'PrebuiltComponentsBuildError',
     docPath: 'prebuilt-components',
     route: 'prebuilt-components/build-failure',
+    // This clip's demo is a terminal replaying the failed build, so the
+    // taskbar switch back out of VS Code opens Windows Terminal, not Chrome.
+    demoApp: 'terminal',
     // Versions first, same as the Quickstart clip: the tailwind v3 / v4 split
     // listed here IS the error, so the frame that explains the failure comes
     // before the failure itself.

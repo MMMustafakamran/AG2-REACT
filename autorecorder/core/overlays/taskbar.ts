@@ -110,13 +110,48 @@ export async function waitForHydration(
     .catch(() => false);
 }
 
+/**
+ * The taskbar apps a recording can bring to the foreground.
+ *
+ * `terminal` exists because one page's demo is a build failure replayed in a
+ * terminal rather than a page in the browser -- switching back to it by
+ * clicking Chrome showed the wrong app opening the shot.
+ */
+export type TaskbarApp = 'chrome' | 'vscode' | 'terminal';
+
+/** Taskbar tile / indicator element ids, keyed by app. */
+const TASKBAR_TILE_ID: Record<TaskbarApp, string> = {
+  chrome: 'win11-taskbar-chrome',
+  vscode: 'win11-taskbar-vscode',
+  terminal: 'win11-taskbar-terminal',
+};
+
+const TASKBAR_INDICATOR_ID: Record<TaskbarApp, string> = {
+  chrome: 'win11-chrome-indicator',
+  vscode: 'win11-vscode-indicator',
+  terminal: 'win11-terminal-indicator',
+};
+
+/**
+ * Fallback x-offsets from the centre of the viewport, in pixels.
+ *
+ * Only used when the tile element cannot be measured. The centred icon strip is
+ * nine 40px tiles with 3px gaps, so tile i sits at `i * 43 + 20 - 192`.
+ */
+const TASKBAR_FALLBACK_OFFSET: Record<TaskbarApp, number> = {
+  chrome: 0,
+  vscode: 43,
+  terminal: 129,
+};
+
 /** Injects or re-attaches the Windows 11 Taskbar & Virtual Mouse overlay onto the current page */
 export async function ensureOverlays(
   page: Page,
-  activeApp: 'chrome' | 'vscode' = 'chrome',
+  activeApp: TaskbarApp = 'chrome',
 ): Promise<void> {
   const chromeInd = activeApp === 'chrome' ? '#60a5fa' : 'transparent';
   const vscodeInd = activeApp === 'vscode' ? '#60a5fa' : 'transparent';
+  const terminalInd = activeApp === 'terminal' ? '#60a5fa' : 'transparent';
   const { x: curX, y: curY } = getGlobalCursorPos();
 
   const code = `
@@ -207,8 +242,9 @@ export async function ensureOverlays(
           '  </div>',
 
           // Windows Terminal
-          '  <div id="win11-taskbar-terminal" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:5px;transition:background 0.15s ease;">',
+          '  <div id="win11-taskbar-terminal" style="width:40px;height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;border-radius:5px;transition:background 0.15s ease;${activeApp === 'terminal' ? 'background:rgba(255,255,255,0.08);' : ''}">',
           '    <svg width="22" height="22" viewBox="0 0 24 24"><rect width="22" height="22" x="1" y="1" rx="4" fill="#18181b" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><path d="m6 8 4 4-4 4" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><line x1="12" y1="16" x2="17" y2="16" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/></svg>',
+          '    <div id="win11-terminal-indicator" style="position:absolute;bottom:2px;width:${activeApp === 'terminal' ? '16px' : '6px'};height:3px;background:${terminalInd || 'rgba(255,255,255,0.4)'};border-radius:2px;transition:all 0.2s ease;"></div>',
           '  </div>',
 
           // Microsoft Copilot (Fluent Butterfly)
@@ -260,10 +296,13 @@ export async function ensureOverlays(
         // Update indicators and tile backgrounds if already present
         var cTile = document.getElementById('win11-taskbar-chrome');
         var vTile = document.getElementById('win11-taskbar-vscode');
+        var tTile = document.getElementById('win11-taskbar-terminal');
         var cInd = document.getElementById('win11-chrome-indicator');
         var vInd = document.getElementById('win11-vscode-indicator');
+        var tInd = document.getElementById('win11-terminal-indicator');
         if (cTile) cTile.style.backgroundColor = '${activeApp === 'chrome' ? 'rgba(255,255,255,0.08)' : 'transparent'}';
         if (vTile) vTile.style.backgroundColor = '${activeApp === 'vscode' ? 'rgba(255,255,255,0.08)' : 'transparent'}';
+        if (tTile) tTile.style.backgroundColor = '${activeApp === 'terminal' ? 'rgba(255,255,255,0.08)' : 'transparent'}';
         if (cInd) {
           cInd.style.background = '${chromeInd || 'rgba(255,255,255,0.4)'}';
           cInd.style.width = '${activeApp === 'chrome' ? '16px' : '6px'}';
@@ -271,6 +310,10 @@ export async function ensureOverlays(
         if (vInd) {
           vInd.style.background = '${vscodeInd || 'rgba(255,255,255,0.4)'}';
           vInd.style.width = '${activeApp === 'vscode' ? '16px' : '6px'}';
+        }
+        if (tInd) {
+          tInd.style.background = '${terminalInd || 'rgba(255,255,255,0.4)'}';
+          tInd.style.width = '${activeApp === 'terminal' ? '16px' : '6px'}';
         }
       }
 
@@ -312,10 +355,9 @@ export async function ensureOverlays(
 /** Glides virtual mouse down to Taskbar icon, clicks it, and illuminates active glow indicator */
 export async function clickTaskbarApp(
   page: Page,
-  targetApp: 'vscode' | 'chrome',
+  targetApp: TaskbarApp,
 ): Promise<void> {
-  const targetId =
-    targetApp === 'vscode' ? 'win11-taskbar-vscode' : 'win11-taskbar-chrome';
+  const targetId = TASKBAR_TILE_ID[targetApp];
 
   // Get taskbar icon coordinates
   const coords = (await page.evaluate(`
@@ -326,7 +368,7 @@ export async function clickTaskbarApp(
         return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
       }
       return {
-        x: window.innerWidth / 2 + (${targetApp === 'vscode' ? 69 : 23}),
+        x: window.innerWidth / 2 + (${TASKBAR_FALLBACK_OFFSET[targetApp]}),
         y: window.innerHeight - 24,
       };
     })()
@@ -347,34 +389,26 @@ export async function clickTaskbarApp(
   // Click taskbar icon
   await humanClick(page);
 
-  // Illuminate active indicator bar and update tile styles
+  // Illuminate the clicked app's indicator bar and dim every other one.
+  const tiles = (Object.keys(TASKBAR_TILE_ID) as TaskbarApp[]).map((app) => ({
+    tile: TASKBAR_TILE_ID[app],
+    indicator: TASKBAR_INDICATOR_ID[app],
+    active: app === targetApp,
+  }));
   await page.evaluate(`
     (function() {
-      var cTile = document.getElementById('win11-taskbar-chrome');
-      var vTile = document.getElementById('win11-taskbar-vscode');
-      var cInd = document.getElementById('win11-chrome-indicator');
-      var vInd = document.getElementById('win11-vscode-indicator');
-      if ('${targetApp}' === 'vscode') {
-        if (vTile) vTile.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
-        if (cTile) cTile.style.backgroundColor = 'transparent';
-        if (vInd) {
-          vInd.style.background = '#60a5fa';
-          vInd.style.width = '16px';
+      var tiles = ${JSON.stringify(tiles)};
+      for (var i = 0; i < tiles.length; i++) {
+        var tile = document.getElementById(tiles[i].tile);
+        var ind = document.getElementById(tiles[i].indicator);
+        if (tile) {
+          tile.style.backgroundColor = tiles[i].active
+            ? 'rgba(255, 255, 255, 0.08)'
+            : 'transparent';
         }
-        if (cInd) {
-          cInd.style.background = 'rgba(255, 255, 255, 0.4)';
-          cInd.style.width = '6px';
-        }
-      } else {
-        if (cTile) cTile.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
-        if (vTile) vTile.style.backgroundColor = 'transparent';
-        if (cInd) {
-          cInd.style.background = '#60a5fa';
-          cInd.style.width = '16px';
-        }
-        if (vInd) {
-          vInd.style.background = 'rgba(255, 255, 255, 0.4)';
-          vInd.style.width = '6px';
+        if (ind) {
+          ind.style.background = tiles[i].active ? '#60a5fa' : 'rgba(255, 255, 255, 0.4)';
+          ind.style.width = tiles[i].active ? '16px' : '6px';
         }
       }
     })()

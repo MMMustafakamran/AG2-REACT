@@ -1,6 +1,7 @@
 import { type Page } from 'playwright';
 import { PROJECT, demoUrlFor, docUrlFor } from '../config/project.config';
 import { type IdeTabConfig } from './ide/generator';
+import { type TaskbarApp } from './overlays/taskbar';
 
 export { type IdeTabConfig };
 
@@ -36,6 +37,15 @@ export interface PageDefinition {
 
   /** Extra IDE tabs to switch through, each with its own range. */
   extraTabs?: IdeTabConfig[];
+
+  /**
+   * Which taskbar app the demo belongs to. Defaults to `chrome`.
+   *
+   * Pages whose demo is a terminal replay rather than a browser view set this
+   * to `terminal`, so the cursor returns from VS Code by clicking the Windows
+   * Terminal icon instead of Chrome.
+   */
+  demoApp?: TaskbarApp;
 
   /** Prompt to send. For multi-turn pages this is the first one. */
   prompt: string;
