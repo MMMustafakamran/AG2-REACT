@@ -375,17 +375,39 @@ jobs:
       matrix:
         shard: [1, 2, 3]
 
+    # The three secrets are deliberately NOT here. A job-level `env` entry
+    # overrides anything a step writes to $GITHUB_ENV, so declaring them here
+    # would put the untrimmed values back after the masking step normalised
+    # them. That step exports all three; these are the plain vars only.
     env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_CHAT_MODEL_ID: ${{ vars.OPENAI_CHAT_MODEL_ID || 'gpt-5.4-mini' }}
-      COPILOTKIT_LICENSE_TOKEN: ${{ secrets.COPILOTKIT_LICENSE_TOKEN }}
-      INTELLIGENCE_API_KEY: ${{ secrets.INTELLIGENCE_API_KEY }}
       INTELLIGENCE_API_URL: ${{ vars.INTELLIGENCE_API_URL }}
       INTELLIGENCE_GATEWAY_WS_URL: ${{ vars.INTELLIGENCE_GATEWAY_WS_URL }}
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      # GitHub masks a secret by matching its stored value against each log
+      # line. A secret saved with a trailing newline can never match one line,
+      # so masking silently does nothing and the credential prints in full --
+      # which is how a live key reached a run log here. Registering the trimmed
+      # value as a mask restores the redaction regardless of how the secret is
+      # stored, and re-exporting it means every later step sees a usable key.
+      - name: Normalise and mask credentials
+        env:
+          RAW_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RAW_COPILOTKIT_LICENSE_TOKEN: ${{ secrets.COPILOTKIT_LICENSE_TOKEN }}
+          RAW_INTELLIGENCE_API_KEY: ${{ secrets.INTELLIGENCE_API_KEY }}
+        run: |
+          set -euo pipefail
+          for NAME in OPENAI_API_KEY COPILOTKIT_LICENSE_TOKEN INTELLIGENCE_API_KEY; do
+            RAW="RAW_${NAME}"
+            VALUE="$(printf '%s' "${!RAW:-}" | tr -d '\r\n')"
+            [ -n "$VALUE" ] || continue
+            echo "::add-mask::$VALUE"
+            echo "${NAME}=${VALUE}" >> "$GITHUB_ENV"
+          done
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
@@ -457,6 +479,18 @@ jobs:
           else
             echo "### 🧩 Worker Shard ${{ matrix.shard }}/3 produced no report" >> $GITHUB_STEP_SUMMARY
           fi
+
+      # Second line of defence: the artifact carries backend.log verbatim, and a
+      # traceback there can quote an Authorization header. Anyone who can read
+      # the artifact can read that, mask or no mask.
+      - name: Scrub credentials from the logs before they are uploaded
+        if: always()
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for LOG in autorecorder/videos/logs/*.log; do
+            sed -i -E               -e 's/(sk|rk)-[A-Za-z0-9_-]{16,}/-***REDACTED***/g'               -e 's/([Bb]earer[[:space:]]+)[A-Za-z0-9._~+\/=-]{16,}/***REDACTED***/g'               "$LOG"
+          done
 
       - name: Upload Shard Artifacts
         if: always()

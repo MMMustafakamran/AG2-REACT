@@ -184,10 +184,25 @@ function spawnServer(command, cwd, logName) {
   return { proc, logPath };
 }
 
+/**
+ * Blank out anything shaped like an API key.
+ *
+ * The backend prints request headers when a stream dies, and GitHub's own
+ * masking cannot be relied on to catch them: it matches the stored secret
+ * against each log line, so a secret holding a trailing newline never matches
+ * and prints in full. That is how a live key reached a run log. Redacting here
+ * does not depend on how the secret was stored.
+ */
+export function redactSecrets(text) {
+  return String(text)
+    .replace(/\b(sk|rk)-[A-Za-z0-9_-]{16,}/g, '$1-***REDACTED***')
+    .replace(/(Bearer\s+)[A-Za-z0-9._~+/=-]{16,}/gi, '$1***REDACTED***');
+}
+
 function tailLog(logPath, lines = 25) {
   try {
     const content = fs.readFileSync(logPath, 'utf8').trimEnd().split(/\r?\n/);
-    return content.slice(-lines).join('\n');
+    return redactSecrets(content.slice(-lines).join('\n'));
   } catch {
     return '(no log captured)';
   }
