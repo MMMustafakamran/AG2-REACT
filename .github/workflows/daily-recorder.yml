@@ -483,14 +483,13 @@ jobs:
       # Second line of defence: the artifact carries backend.log verbatim, and a
       # traceback there can quote an Authorization header. Anyone who can read
       # the artifact can read that, mask or no mask.
+      # Second line of defence: the artifact carries backend.log verbatim, and a
+      # traceback there can quote an Authorization header. Anyone who can read
+      # the artifact can read that, mask or no mask -- the runner's redaction
+      # does not follow a file into an artifact.
       - name: Scrub credentials from the logs before they are uploaded
         if: always()
-        run: |
-          set -euo pipefail
-          shopt -s nullglob
-          for LOG in autorecorder/videos/logs/*.log; do
-            sed -i -E               -e 's/(sk|rk)-[A-Za-z0-9_-]{16,}/-***REDACTED***/g'               -e 's/([Bb]earer[[:space:]]+)[A-Za-z0-9._~+\/=-]{16,}/***REDACTED***/g'               "$LOG"
-          done
+        run: node ci/scrub-logs.mjs
 
       - name: Upload Shard Artifacts
         if: always()
