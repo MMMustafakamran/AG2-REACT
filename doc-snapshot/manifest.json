@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "docsRoot": "https://docs.copilotkit.ai/ag2",
-  "syncedAt": "2026-08-31T19:25:18.173Z",
+  "syncedAt": "2026-09-04T07:58:14.799Z",
   "pages": {
     "/ag2": {
       "file": "ag2.md",
@@ -138,27 +138,27 @@
     },
     "/ag2/headless-threads": {
       "file": "ag2__headless-threads.md",
-      "sha256": "96d9b34a9bba5284721bf705063187a31d27503336ce44c15bee6cd7576800ea",
-      "bytes": 10012,
-      "lines": 208,
+      "sha256": "241635692c18737b4b68c03760138df5a8943ff0483d84d77ae56fe2a15cdc78",
+      "bytes": 10479,
+      "lines": 222,
       "routes": [
         "/headless-threads"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     },
     "/ag2/inspector": {
       "file": "ag2__inspector.md",
-      "sha256": "ca89327592f1102fdb3a47e876c926958e987e433cd33eb9bebf3bc10923376e",
-      "bytes": 5956,
+      "sha256": "a0bceecc75c9bbbe4eb3f554f9eb13e6f72a0966a457f1f8e05e46319095cbe3",
+      "bytes": 5960,
       "lines": 127,
       "routes": [
         "/inspector"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:20 GMT"
+      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     },
     "/ag2/prebuilt-components": {
       "file": "ag2__prebuilt-components.md",
@@ -222,51 +222,51 @@
     },
     "/ag2/shared-state/read": {
       "file": "ag2__shared-state__read.md",
-      "sha256": "bcbc9f8a4cf74fe3b291583d6a9ebd17294b1acc15847f301324e4da4646412c",
-      "bytes": 6016,
-      "lines": 182,
+      "sha256": "827b67260c26405aaf7b5a72ebe5be4bdd2cd979337bbea8dd5a6d0f24b7049c",
+      "bytes": 6082,
+      "lines": 183,
       "routes": [
         "/shared-state/read"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     },
     "/ag2/shared-state/write": {
       "file": "ag2__shared-state__write.md",
-      "sha256": "4f7393ec2becd2ac6e95a672bb7e61686d35722d58575000dc0553cff477db31",
-      "bytes": 6227,
-      "lines": 189,
+      "sha256": "c3117290770da2210db5d36e34d8d777f4f63e4e06d98d8a91db77b186ddf225",
+      "bytes": 6454,
+      "lines": 195,
       "routes": [
         "/shared-state/write"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     },
     "/ag2/threads": {
       "file": "ag2__threads.md",
-      "sha256": "b9aa3e51e01fc9738864011327f74b66d058b715a9230b598a134835cbba8b80",
-      "bytes": 11839,
+      "sha256": "026bb4436a87016132423fe4b9da25d23cb3ebcacda1d285b76097eb00541cb2",
+      "bytes": 11854,
       "lines": 211,
       "routes": [
         "/threads"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     },
     "/ag2/threads-lifecycle": {
       "file": "ag2__threads-lifecycle.md",
-      "sha256": "3b0a0e9844372482465ceafbdcd40bfc2207bc6f416eb6f4c4f14dc588f69bad",
-      "bytes": 15689,
+      "sha256": "75d304210aa9c1c367fde6fd9378a869b66c0caa95014778d2de49ca8afad313",
+      "bytes": 15713,
       "lines": 257,
       "routes": [
         "/threads-lifecycle"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     }
   },
   "sitemap": {
