@@ -69,17 +69,44 @@ export default function Page() {
         offers no guard for it.
       </Callout>
 
-      <Callout tone="warn" title="The new render sample blanks the whole page">
+      <Callout tone="warn" title="The render sample is named after the component it would replace">
         &quot;Rendering agent state in your app&quot; reuses the component name{" "}
         <code>YourMainContent</code> from the step above it — the component
-        that draws the entire left pane — but its body is now{" "}
-        <code>if (!state.language) return null;</code>. Copy it in literally,
-        the way the page tells you to, and the main content disappears until the
-        first snapshot lands rather than one small line being hidden. The old{" "}
+        that draws the entire left pane — but its body is{" "}
+        <code>if (!state.language) return null;</code> followed by a single{" "}
+        <code>div</code>. Take the page at its word and your main content is
+        replaced by one line that disappears whenever state is empty. The old{" "}
         <code>render</code> prop failed to compile; this one compiles and
-        deletes your UI, which is the harder failure to spot. The demo keeps the
-        conditional on the single Language line, where the section&apos;s intent
-        clearly is.
+        deletes your UI, which is the harder failure to spot.
+        <br />
+        <br />
+        It is implemented verbatim, under its published name, and rendered in
+        the dashed box on the demo — small, so the route survives it, and live,
+        so you can watch it return nothing before the seed lands.
+      </Callout>
+
+      <Callout tone="warn" title="The snippet builds a guarded `state` and then ignores it">
+        The step&apos;s snippet computes{" "}
+        <code>const state = (agent.state ?? {"{}"}) as Partial&lt;AgentState&gt;</code>
+        , uses it in the effect, and then renders{" "}
+        <code>&lt;p&gt;Language: {"{agent.state.language}"}&lt;/p&gt;</code> —
+        going back to the raw object on the one line that is highlighted. The
+        guarded const exists only to feed the effect&apos;s dependency array.
+        It does not crash, because <code>AbstractAgent</code> initialises{" "}
+        <code>state</code> to <code>{"{}"}</code>, so the read yields{" "}
+        <code>undefined</code> and React renders nothing — but the page is
+        demonstrating a defensive pattern it does not follow itself.
+      </Callout>
+
+      <Callout tone="warn" title="The same line is written two different ways across the guides">
+        This page publishes{" "}
+        <code>{"{agent.state.language}"}</code>. The Mastra and Microsoft Agent
+        Framework versions of the identical snippet publish{" "}
+        <code>{"{agent.state?.language}"}</code>. Same guide, same step, same
+        line — and the difference is exactly the optional chaining that decides
+        whether the page survives an undefined state. Nothing says which is
+        intended. Each repo here reproduces its own page&apos;s spelling, so the
+        divergence stays visible rather than being normalised away.
       </Callout>
 
       <Callout tone="warn" title="Rendering state inside the chat is no longer documented">

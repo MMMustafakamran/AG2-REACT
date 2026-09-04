@@ -26,6 +26,27 @@ type AgentState = {
   language: "english" | "spanish";
 };
 
+/**
+ * "Rendering agent state in your app", verbatim.
+ *
+ * The page names this `YourMainContent` — the same name as the component in
+ * the step above, which draws the whole page. Reproduced under that name so
+ * the collision is visible; rendered as a small widget so the route survives
+ * it. `agentId` is the harness's `sample_agent` rather than the page's
+ * `my_agent`, as everywhere else here.
+ */
+// [5] shared state: render state in your app
+// [!code highlight]
+function YourMainContent() {
+  const { agent } = useAgent({
+    agentId: "sample_agent",
+  });
+  const state = (agent.state ?? {}) as Partial<AgentState>;
+
+  if (!state.language) return null;
+  return <div>Language: {state.language}</div>;
+}
+
 export default function Page() {
   // [1] shared state: read agent state
   // [!code highlight]
@@ -50,17 +71,25 @@ export default function Page() {
             Your main content
           </h1>
           <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+            {/* [3] shared state: display state */}
+            {/* [!code highlight] */}
             Language:{" "}
             <strong className="text-[var(--accent)]">
-              {state.language ?? "—"}
+              {agent.state.language}
             </strong>
           </p>
 
           <h2 className="mt-6 text-xs font-semibold uppercase tracking-wide text-slate-500">
+            The page&apos;s render sample
+          </h2>
+          <div className="mt-2 rounded-lg border border-dashed border-slate-300 p-3 text-sm dark:border-slate-600">
+            <YourMainContent />
+          </div>
+
+          <h2 className="mt-6 text-xs font-semibold uppercase tracking-wide text-slate-500">
             Raw agent.state
           </h2>
-          {/* [3] shared state: display state */}
-          {/* [!code highlight] */}
+          {/* [4] shared state: raw state */}
           <pre className="mt-2 max-h-56 overflow-auto rounded-lg bg-slate-950 p-3 text-xs text-slate-100">
             {JSON.stringify(agent.state ?? {}, null, 2)}
           </pre>
