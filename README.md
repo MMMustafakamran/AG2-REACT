@@ -19,7 +19,7 @@ A navigable, working test harness for the CopilotKit AG2 integration — each do
 
 [AG2](https://ag2.ai/) (formerly AutoGen) is an open-source agent framework. Its `ag-ui` extra exposes an agent over [AG-UI](https://ag-ui.com), the event protocol CopilotKit speaks, which is what lets a React app drive it with streaming, tool calls, shared state, and generative UI.
 
-This repo is a test harness for that integration, covering a **scoped set of 22 doc pages** (listed in §8). Each route implements what its page teaches and shows the exact source that makes it work.
+This repo is a test harness for that integration, covering a **scoped set of 25 doc pages** (listed in §8). Each route implements what its page teaches and shows the exact source that makes it work.
 
 **Everything here comes from the documentation.** No tool, prompt, or state key was invented — the backend exposes exactly the tools the docs define (`get_weather`, `set_language`, `get_colleagues`, `add_search`, `run_searches`) and nothing else. Where a published snippet does not run, the divergence is written down rather than smoothed over.
 
@@ -73,7 +73,7 @@ The docs mount one agent at `/chat`. This harness mounts three, because state sh
 | [uv](https://docs.astral.sh/uv/) | any recent               | Backend dependency management, as the AG2 quickstart specifies      |
 | OpenAI API key       | —                                    | Every AG2 doc sample uses OpenAI                                    |
 
-No CopilotKit account is needed for 18 of the 22 routes. The four Rich Threads routes need CopilotKit Intelligence credentials; without them they degrade rather than break (see §8).
+No CopilotKit account is needed for 21 of the 25 routes. The four Rich Threads routes need CopilotKit Intelligence credentials; without them they degrade rather than break (see §8).
 
 ---
 
@@ -209,6 +209,10 @@ The code on a page is never a re-typed approximation: each page reads real files
 
 **`/frontend-tools`** — A tool the agent calls that runs in the browser. **Try:** `Say hello to Damien` **Pass:** a browser alert fires, and after dismissing it the agent confirms. **Fail:** a text reply with no alert.
 
+**`/webmcp`** — 🚧 **Tracked, not implemented.** The doc adds a `webmcp` flag to an existing frontend tool so browser agents can discover it. Its own test procedure needs Chrome 149+ with the WebMCP origin trial (or `chrome://flags/#enable-webmcp-testing`) and Chrome's Model Context Tool Inspector; CopilotKit no-ops where `document.modelContext` is absent, so a demo here would register nothing and still look green.
+
+**`/human-in-the-loop/governed-actions`** — 🚧 **Tracked, not implemented.** An approval card gating a side-effecting action, via `useInterrupt` or `useHumanInTheLoop`. The page is served byte-identically under all five framework prefixes and its snippets are plain React, so it is implemented once — in Agno-react and Mastra-react — rather than five times.
+
 ### Shared State
 
 **`/shared-state/read`** — `agent.state` rendered outside the chat. **Try:** `Switch to Spanish` **Pass:** the Language line updates when the run finishes. **Known limit:** asking the agent *what* language it is using does not work — the page never gives it a way to read its own state (Known issues #6).
@@ -239,9 +243,13 @@ All four run on `/api/copilotkit-threads`, a separate Intelligence-backed runtim
 
 **`/ag-ui`** — A live capture of the raw AG-UI event stream. **Try:** `What's the weather in Tokyo?` **Pass:** `RUN_STARTED`, `TOOL_CALL_*`, `TEXT_MESSAGE_*`, `RUN_FINISHED` scroll past in order.
 
+### Intelligence
+
+**`/intelligence/quickstart`** — 🚧 **Tracked, not implemented.** Connecting an existing app to a hosted CopilotKit Intelligence project so threads persist. Step 1 is `npx copilotkit@latest login` plus `project select`, which writes a `CPK_INTELLIGENCE_API_KEY` — an account-scoped resource this harness does not have, so every later step has nothing to assert against. Tracked because it is a genuinely new page; the rest of `/ag2/intelligence/*` is the old `/ag2/premium/*` set renamed, and stays out of scope.
+
 ### Doc Sync
 
-**`/doc-sync`** — Re-fetches the markdown behind all 22 tracked pages, diffs each against `doc-snapshot/`, and flags changes inside code blocks at higher severity than prose.
+**`/doc-sync`** — Re-fetches the markdown behind all 25 tracked pages, diffs each against `doc-snapshot/`, and flags changes inside code blocks at higher severity than prose.
 
 ---
 
@@ -261,6 +269,8 @@ All four run on `/api/copilotkit-threads`, a separate Intelligence-backed runtim
 | `/ag2/generative-ui/tool-rendering`                   | `/generative-ui/tool-rendering`                | ✅ Working   | Both React samples on the page fail to compile — #2.                        |
 | `/ag2/generative-ui/state-rendering`                  | `/generative-ui/state-rendering`               | ✅ Working   | Uses `search_agent`. Mid-run snapshots undocumented — #7.                    |
 | `/ag2/frontend-tools`                                 | `/frontend-tools`                              | ✅ Working   |                                                                              |
+| `/ag2/webmcp`                                         | `/webmcp`                                      | 🚧 Not started | Tracked for drift. Needs Chrome 149+ and the WebMCP origin trial.          |
+| `/ag2/human-in-the-loop/governed-actions`             | `/human-in-the-loop/governed-actions`          | 🚧 Not started | Tracked for drift. Same bytes under all five prefixes; built in Agno-react and Mastra-react. |
 | `/ag2/shared-state/read`                              | `/shared-state/read`                           | ⚠️ Partial   | State reaches the UI; the chat half of the prompt has no mechanism — #6.     |
 | `/ag2/shared-state/write`                             | `/shared-state/write`                          | ✅ Working   | Works only because state is merged in the opposite order to the default — #9. |
 | `/ag2/readables`                                      | `/readables`                                   | ⚠️ Partial   | The published lookup can never resolve — #5.                                 |
@@ -271,10 +281,13 @@ All four run on `/api/copilotkit-threads`, a separate Intelligence-backed runtim
 | `/ag2/threads-lifecycle`                              | `/threads-lifecycle`                           | ⚠️ Partial   | Server-side replay needs the license.                                       |
 | `/ag2/copilot-runtime`                                | `/copilot-runtime`                             | ✅ Working   |                                                                              |
 | `/ag2/ag-ui`                                          | `/ag-ui`                                       | ✅ Working   |                                                                              |
+| `/ag2/intelligence/quickstart`                        | `/intelligence/quickstart`                     | 🚧 Not started | Tracked for drift. Needs a hosted Intelligence project and `CPK_INTELLIGENCE_API_KEY`. |
 
 **Legend:** ✅ Working · ⚠️ Partial · 📖 Reference · 🚧 Not started · ❌ Broken
 
 Out of scope by request: CLI, Build with agents, MCP Apps, A2UI, Intelligence Platform, Troubleshooting, Cookbook, Tutorials. Also out of scope: `/ag2/threads-import` and `/ag2/threads-self-managed`.
+
+**Tracked without a demo.** Three pages carry a route, a nav entry and a snapshot so drift is watched, but nothing is implemented behind them and the recorder does not touch them: `/ag2/webmcp`, `/ag2/human-in-the-loop/governed-actions` and `/ag2/intelligence/quickstart`. The reason is on each route's page and in §7. Everything else under `/ag2/intelligence/` is the old `/ag2/premium/` set under a new prefix and stays in `doc-snapshot/manifest.json`'s `knownUnmapped` list.
 
 **Sidebar note.** `/ag2/custom-look-and-feel/slots` and `/ag2/custom-look-and-feel/headless-ui` resolve and are fully written, but appear in no expansion of the AG2 sidebar. The only in-nav pointer to the slot system is a five-line snippet at the end of `/ag2/prebuilt-components`. `/ag2/generative-ui/your-components` is a sidebar group whose own URL 404s; its two children resolve.
 
@@ -332,7 +345,7 @@ Found while building against `@copilotkit/react-core` 1.69.2, `@copilotkit/runti
 
 ### Doc drift detection
 
-`/doc-sync` re-fetches the markdown behind all 22 tracked pages, diffs each against `doc-snapshot/pages/`, and classifies: changes inside fenced code blocks outrank prose, because a changed snippet may mean a changed API. Drift is appended to `doc-snapshot/CHANGELOG.md`, which keeps the three most recent dated entries. The snapshot is committed; `doc-snapshot/reports/` is not — it is derived.
+`/doc-sync` re-fetches the markdown behind all 25 tracked pages, diffs each against `doc-snapshot/pages/`, and classifies: changes inside fenced code blocks outrank prose, because a changed snippet may mean a changed API. Drift is appended to `doc-snapshot/CHANGELOG.md`, which keeps the three most recent dated entries. The snapshot is committed; `doc-snapshot/reports/` is not — it is derived.
 
 ---
 
@@ -360,7 +373,7 @@ AG2-REACT/
 │       └── doc-sync/       Fetch, diff, changelog, snapshot store
 │
 ├── doc-snapshot/
-│   ├── pages/              22 markdown files — the committed baseline
+│   ├── pages/              25 markdown files — the committed baseline
 │   ├── manifest.json       Hashes, routes, sitemap; `syncedAt` is the repo's one sync date
 │   └── CHANGELOG.md        Drift history, three most recent dated entries
 │
@@ -385,7 +398,7 @@ Grouped as the AG2 doc nav groups them.
 
 **Generative UI** — [Display-only](https://docs.copilotkit.ai/ag2/generative-ui/your-components/display-only) · [Interactive](https://docs.copilotkit.ai/ag2/generative-ui/your-components/interactive) · [Tool Rendering](https://docs.copilotkit.ai/ag2/generative-ui/tool-rendering) · [State Rendering](https://docs.copilotkit.ai/ag2/generative-ui/state-rendering)
 
-**App Control** — [Frontend Tools](https://docs.copilotkit.ai/ag2/frontend-tools)
+**App Control** — [Frontend Tools](https://docs.copilotkit.ai/ag2/frontend-tools) · [WebMCP](https://docs.copilotkit.ai/ag2/webmcp) † · [Governed Actions](https://docs.copilotkit.ai/ag2/human-in-the-loop/governed-actions) †
 
 **Shared State** — [Reading agent state](https://docs.copilotkit.ai/ag2/shared-state/read) · [Writing agent state](https://docs.copilotkit.ai/ag2/shared-state/write) · [Readables](https://docs.copilotkit.ai/ag2/readables)
 
@@ -394,5 +407,9 @@ Grouped as the AG2 doc nav groups them.
 **Rich Threads** — [Overview](https://docs.copilotkit.ai/ag2/threads) · [Threads Drawer](https://docs.copilotkit.ai/ag2/prebuilt-components/copilot-threads-drawer) · [Headless Threads](https://docs.copilotkit.ai/ag2/headless-threads) · [Thread & History Lifecycle](https://docs.copilotkit.ai/ag2/threads-lifecycle)
 
 **Backend** — [Copilot Runtime](https://docs.copilotkit.ai/ag2/copilot-runtime) · [AG-UI](https://docs.copilotkit.ai/ag2/ag-ui)
+
+**Intelligence** — [Quickstart](https://docs.copilotkit.ai/ag2/intelligence/quickstart) †
+
+† Tracked for drift only — a route and a snapshot exist, the demo does not.
 
 **Upstream** — [AG2](https://ag2.ai/) · [AG2 AG-UI integration](https://docs.ag2.ai/latest/docs/user-guide/ag-ui/) · [AG-UI protocol](https://ag-ui.com)

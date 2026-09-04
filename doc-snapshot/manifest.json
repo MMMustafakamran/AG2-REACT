@@ -148,6 +148,18 @@
       "age": 0,
       "date": "Fri, 04 Sep 2026 07:58:14 GMT"
     },
+    "/ag2/human-in-the-loop/governed-actions": {
+      "file": "ag2__human-in-the-loop__governed-actions.md",
+      "sha256": "c3ffbf2aa5a8b697765c47f5668c9ac1f3608ae778728bb504b77c18a995214b",
+      "bytes": 7168,
+      "lines": 256,
+      "routes": [
+        "/human-in-the-loop/governed-actions"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Fri, 04 Sep 2026 13:40:32 GMT"
+    },
     "/ag2/inspector": {
       "file": "ag2__inspector.md",
       "sha256": "a0bceecc75c9bbbe4eb3f554f9eb13e6f72a0966a457f1f8e05e46319095cbe3",
@@ -159,6 +171,18 @@
       "status": "ok",
       "age": 0,
       "date": "Fri, 04 Sep 2026 07:58:14 GMT"
+    },
+    "/ag2/intelligence/quickstart": {
+      "file": "ag2__intelligence__quickstart.md",
+      "sha256": "3fd05506df0c1b2d889b3952d10ee3a5b62a85112aaaa2f19978848e061f9692",
+      "bytes": 7224,
+      "lines": 160,
+      "routes": [
+        "/intelligence/quickstart"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Fri, 04 Sep 2026 13:40:33 GMT"
     },
     "/ag2/prebuilt-components": {
       "file": "ag2__prebuilt-components.md",
@@ -267,6 +291,18 @@
       "status": "ok",
       "age": 0,
       "date": "Fri, 04 Sep 2026 07:58:14 GMT"
+    },
+    "/ag2/webmcp": {
+      "file": "ag2__webmcp.md",
+      "sha256": "fba9ee0ab9d388b21da549775c978dcb48f1dc179b8a8b7081a0e797648eff49",
+      "bytes": 7476,
+      "lines": 153,
+      "routes": [
+        "/webmcp"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Fri, 04 Sep 2026 13:40:32 GMT"
     }
   },
   "sitemap": {
@@ -331,7 +367,6 @@
       "https://docs.copilotkit.ai/ag2/generative-ui/tool-based",
       "https://docs.copilotkit.ai/ag2/headless",
       "https://docs.copilotkit.ai/ag2/human-in-the-loop",
-      "https://docs.copilotkit.ai/ag2/human-in-the-loop/governed-actions",
       "https://docs.copilotkit.ai/ag2/human-in-the-loop/headless",
       "https://docs.copilotkit.ai/ag2/human-in-the-loop/useInterrupt",
       "https://docs.copilotkit.ai/ag2/intelligence/connect-your-runtime",
@@ -339,7 +374,6 @@
       "https://docs.copilotkit.ai/ag2/intelligence/intelligence-platform",
       "https://docs.copilotkit.ai/ag2/intelligence/managed-intelligence-platform",
       "https://docs.copilotkit.ai/ag2/intelligence/overview",
-      "https://docs.copilotkit.ai/ag2/intelligence/quickstart",
       "https://docs.copilotkit.ai/ag2/intelligence/self-hosting",
       "https://docs.copilotkit.ai/ag2/intelligence/threads-explained",
       "https://docs.copilotkit.ai/ag2/migrate/1.10.X",
@@ -385,7 +419,6 @@
       "https://docs.copilotkit.ai/ag2/tutorials/multi-conversation-chat",
       "https://docs.copilotkit.ai/ag2/voice",
       "https://docs.copilotkit.ai/ag2/vs-code-extension",
-      "https://docs.copilotkit.ai/ag2/webmcp",
       "https://docs.copilotkit.ai/ag2/whats-new",
       "https://docs.copilotkit.ai/ag2/whats-new/a2a-mcp-handshake",
       "https://docs.copilotkit.ai/ag2/whats-new/a2ui-launch",
