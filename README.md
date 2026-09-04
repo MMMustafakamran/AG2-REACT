@@ -255,35 +255,37 @@ All four run on `/api/copilotkit-threads`, a separate Intelligence-backed runtim
 
 ## 8. Testing checklist / current status
 
-| Doc page                                              | Route                                          | Status       | Notes                                                                       |
-| ----------------------------------------------------- | ---------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
-| `/ag2`                                                | `/`                                            | 📖 Reference | Server-side agent probe.                                                     |
-| `/ag2/quickstart`                                     | `/quickstart`                                  | ⚠️ Partial   | Runs, but not from the page's own code. Known issues #1.                    |
-| `/ag2/prebuilt-components`                            | `/prebuilt-components`                         | ✅ Working   |                                                                              |
-| `/ag2/custom-look-and-feel/slots`                     | `/custom-look-and-feel/slots`                  | ✅ Working   | **Not in the doc sidebar**, but resolves. Level 3 sample fails typecheck.    |
-| `/ag2/custom-look-and-feel/headless-ui`               | `/custom-look-and-feel/headless-ui`            | ✅ Working   | **Not in the doc sidebar**; resolves.                                        |
-| `/ag2/programmatic-control`                           | `/programmatic-control`                        | ✅ Working   |                                                                              |
-| `/ag2/inspector`                                      | `/inspector`                                   | ✅ Working   | Dev-only by design.                                                          |
-| `/ag2/generative-ui/your-components/display-only`     | `/generative-ui/your-components/display-only`  | ✅ Working   | Needs no backend declaration.                                                |
-| `/ag2/generative-ui/your-components/interactive`      | `/generative-ui/your-components/interactive`   | ✅ Working   | `useHumanInTheLoop` approval gate.                                           |
-| `/ag2/generative-ui/tool-rendering`                   | `/generative-ui/tool-rendering`                | ✅ Working   | Both React samples on the page fail to compile — #2.                        |
-| `/ag2/generative-ui/state-rendering`                  | `/generative-ui/state-rendering`               | ✅ Working   | Uses `search_agent`. Mid-run snapshots undocumented — #7.                    |
-| `/ag2/frontend-tools`                                 | `/frontend-tools`                              | ✅ Working   |                                                                              |
-| `/ag2/webmcp`                                         | `/webmcp`                                      | 🚧 Not started | Tracked for drift. Needs Chrome 149+ and the WebMCP origin trial.          |
-| `/ag2/human-in-the-loop/governed-actions`             | `/human-in-the-loop/governed-actions`          | 🚧 Not started | Tracked for drift. Same bytes under all five prefixes; built in Agno-react and Mastra-react. |
-| `/ag2/shared-state/read`                              | `/shared-state/read`                           | ⚠️ Partial   | State reaches the UI; the chat half of the prompt has no mechanism — #6.     |
-| `/ag2/shared-state/write`                             | `/shared-state/write`                          | ✅ Working   | Works only because state is merged in the opposite order to the default — #9. |
-| `/ag2/readables`                                      | `/readables`                                   | ⚠️ Partial   | The published lookup can never resolve — #5.                                 |
-| `/ag2/auth`                                           | `/auth`                                        | ✅ Working   | Doc's own frontend/backend pair does not connect — #8.                       |
-| `/ag2/threads`                                        | `/threads`                                     | ⚠️ Partial   | Overview + credentials. Free-tier license expires 2026-09-12.                |
-| `/ag2/prebuilt-components/copilot-threads-drawer`     | `/prebuilt-components/copilot-threads-drawer`  | ⚠️ Partial   | Requires the license. Rename absent by design.                              |
-| `/ag2/headless-threads`                               | `/headless-threads`                            | ⚠️ Partial   | All four doc steps. Mutations need the license.                             |
-| `/ag2/threads-lifecycle`                              | `/threads-lifecycle`                           | ⚠️ Partial   | Server-side replay needs the license.                                       |
-| `/ag2/copilot-runtime`                                | `/copilot-runtime`                             | ✅ Working   |                                                                              |
-| `/ag2/ag-ui`                                          | `/ag-ui`                                       | ✅ Working   |                                                                              |
-| `/ag2/intelligence/quickstart`                        | `/intelligence/quickstart`                     | 🚧 Not started | Tracked for drift. Needs a hosted Intelligence project and `CPK_INTELLIGENCE_API_KEY`. |
+<!-- status-table:begin — generated by ci/write-readme-status.mjs; edit Notes here, everything else in nav-config.ts -->
+| Doc page                                          | Route                                         | Status        | Recorded | Notes                                                                                        |
+| ------------------------------------------------- | --------------------------------------------- | ------------- | -------- | -------------------------------------------------------------------------------------------- |
+| `/ag2`                                            | `/`                                           | 📖 Reference   | —        | Server-side agent probe.                                                                     |
+| `/ag2/quickstart`                                 | `/quickstart`                                 | ⚠️ Partial    | 🎬        | Runs, but not from the page's own code. Known issues #1.                                     |
+| `/ag2/prebuilt-components`                        | `/prebuilt-components`                        | ✅ Working     | 🎬        |                                                                                              |
+| `/ag2/custom-look-and-feel/slots`                 | `/custom-look-and-feel/slots`                 | ✅ Working     | 🎬        | **Not in the doc sidebar**, but resolves. Level 3 sample fails typecheck.                    |
+| `/ag2/custom-look-and-feel/headless-ui`           | `/custom-look-and-feel/headless-ui`           | ✅ Working     | 🎬        | **Not in the doc sidebar**; resolves.                                                        |
+| `/ag2/programmatic-control`                       | `/programmatic-control`                       | ✅ Working     | 🎬        |                                                                                              |
+| `/ag2/inspector`                                  | `/inspector`                                  | ✅ Working     | 🎬        | Dev-only by design.                                                                          |
+| `/ag2/generative-ui/your-components/display-only` | `/generative-ui/your-components/display-only` | ✅ Working     | 🎬        | Needs no backend declaration.                                                                |
+| `/ag2/generative-ui/your-components/interactive`  | `/generative-ui/your-components/interactive`  | ✅ Working     | 🎬        | `useHumanInTheLoop` approval gate.                                                           |
+| `/ag2/generative-ui/tool-rendering`               | `/generative-ui/tool-rendering`               | ✅ Working     | 🎬        | Both React samples on the page fail to compile — #2.                                         |
+| `/ag2/generative-ui/state-rendering`              | `/generative-ui/state-rendering`              | ✅ Working     | 🎬        | Uses `search_agent`. Mid-run snapshots undocumented — #7.                                    |
+| `/ag2/frontend-tools`                             | `/frontend-tools`                             | ✅ Working     | 🎬        |                                                                                              |
+| `/ag2/webmcp`                                     | `/webmcp`                                     | 🚧 Not started | —        | Tracked for drift. Needs Chrome 149+ and the WebMCP origin trial.                            |
+| `/ag2/human-in-the-loop/governed-actions`         | `/human-in-the-loop/governed-actions`         | 🚧 Not started | —        | Tracked for drift. Same bytes under all five prefixes; built in Agno-react and Mastra-react. |
+| `/ag2/shared-state/read`                          | `/shared-state/read`                          | ⚠️ Partial    | 🎬        | State reaches the UI; the chat half of the prompt has no mechanism — #6.                     |
+| `/ag2/shared-state/write`                         | `/shared-state/write`                         | ✅ Working     | 🎬        | Works only because state is merged in the opposite order to the default — #9.                |
+| `/ag2/readables`                                  | `/readables`                                  | ⚠️ Partial    | 🎬        | The published lookup can never resolve — #5.                                                 |
+| `/ag2/auth`                                       | `/auth`                                       | ✅ Working     | 🎬        | Doc's own frontend/backend pair does not connect — #8.                                       |
+| `/ag2/threads`                                    | `/threads`                                    | ⚠️ Partial    | —        | Overview + credentials. Free-tier license expires 2026-09-12.                                |
+| `/ag2/prebuilt-components/copilot-threads-drawer` | `/prebuilt-components/copilot-threads-drawer` | ⚠️ Partial    | 🎬        | Requires the license. Rename absent by design.                                               |
+| `/ag2/headless-threads`                           | `/headless-threads`                           | ⚠️ Partial    | 🎬        | All four doc steps. Mutations need the license.                                              |
+| `/ag2/threads-lifecycle`                          | `/threads-lifecycle`                          | ⚠️ Partial    | 🎬        | Server-side replay needs the license.                                                        |
+| `/ag2/copilot-runtime`                            | `/copilot-runtime`                            | ✅ Working     | 🎬        |                                                                                              |
+| `/ag2/ag-ui`                                      | `/ag-ui`                                      | ✅ Working     | 🎬        |                                                                                              |
+| `/ag2/intelligence/quickstart`                    | `/intelligence/quickstart`                    | 🚧 Not started | —        | Tracked for drift. Needs a hosted Intelligence project and `CPK_INTELLIGENCE_API_KEY`.       |
+<!-- status-table:end -->
 
-**Legend:** ✅ Working · ⚠️ Partial · 📖 Reference · 🚧 Not started · ❌ Broken
+**Legend:** ✅ Working · ⚠️ Partial · 📖 Reference · 🚧 Not started · ❌ Broken · 🎬 driven by the autorecorder. Generated by `npm run readme:status` from `frontend/src/lib/nav-config.ts` and `autorecorder/config/pages.config.ts`; only the Notes column is edited here.
 
 Out of scope by request: CLI, Build with agents, MCP Apps, A2UI, Intelligence Platform, Troubleshooting, Cookbook, Tutorials. Also out of scope: `/ag2/threads-import` and `/ag2/threads-self-managed`.
 
