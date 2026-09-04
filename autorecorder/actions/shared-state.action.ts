@@ -6,6 +6,8 @@ import { sendPrompt, waitForAgentResponseCompletion } from '../core/actions';
 export const runSharedStateReadAction: PageActionHandler = async (
   page: Page,
   config: PageRecordConfig,
+  _rootPath,
+  ctx,
 ) => {
   console.log(`   [Shared State Read] Sending prompt to switch language in agent.state...`);
   const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 12000 });
@@ -40,6 +42,8 @@ export const runSharedStateReadAction: PageActionHandler = async (
 export const runSharedStateWriteAction: PageActionHandler = async (
   page: Page,
   config: PageRecordConfig,
+  _rootPath,
+  ctx,
 ) => {
   console.log(`   [Shared State Write] Clicking "Toggle + re-run agent" button on the left...`);
   await sleep(1500);

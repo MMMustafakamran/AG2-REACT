@@ -6,6 +6,8 @@ import { sendPrompt, waitForAgentResponseCompletion } from '../core/actions';
 export const runStateRenderingAction: PageActionHandler = async (
   page: Page,
   config: PageRecordConfig,
+  _rootPath,
+  ctx,
 ) => {
   console.log(`   [State Rendering] Sending prompt to stream searches state...`);
   const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 12000 });

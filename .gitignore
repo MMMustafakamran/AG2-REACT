@@ -40,6 +40,7 @@ autorecorder/videos/.temp_chunks/
 # Run artifacts written by the recorder — regenerated every run.
 autorecorder/videos/RUN_REPORT.md
 autorecorder/videos/RUN_REPORT.json
+autorecorder/videos/RECORD_RESULTS.json
 autorecorder/videos/logs/
 
 # Generated after install by autorecorder/scripts/write-versions.mjs.
