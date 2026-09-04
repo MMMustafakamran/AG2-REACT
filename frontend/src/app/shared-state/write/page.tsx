@@ -25,6 +25,28 @@ export default function Page() {
         </div>
       </Panel>
 
+      <Callout tone="info" title="`setState` replaces — the doc now spreads">
+        The page used to publish{" "}
+        <code>agent.setState({"{ language: … }"})</code>. It now publishes{" "}
+        <code>agent.setState({"{ ...(agent.state ?? {}), language: … }"})</code>
+        . That is a correction, not a style change:{" "}
+        <code>setState</code> assigns the whole state object, so the old form
+        dropped every other key the agent was carrying. One-key demos never
+        showed it; the State Rendering agent, with its own keys alongside{" "}
+        <code>language</code>, would have. Both buttons below spread.
+      </Callout>
+
+      <Callout tone="info" title="Seeding moved into an effect">
+        The starting value used to come from an{" "}
+        <code>initialState</code> prop that <code>useAgent</code> does not
+        accept. The page now seeds after connect —{" "}
+        <code>isReady</code>, then <code>setState</code> if the key is still
+        missing — so the Language line reads{" "}
+        <code>english</code> on load instead of a dash. The visible effect on
+        this route: the first Toggle now flips english → spanish, where before
+        it flipped an unset value.
+      </Callout>
+
       <Callout tone="info" title="Set state, then decide when the agent reacts">
         <code>setState</code> alone is passive — the new value waits for the next
         run. When a UI change should provoke the agent immediately, the doc&apos;s

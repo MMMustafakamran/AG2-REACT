@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { CopilotChat, useAgent } from "@copilotkit/react-core/v2";
 
 import { DemoFrame } from "@/components/demo-frame";
@@ -13,10 +15,11 @@ import { DemoFrame } from "@/components/demo-frame";
  * `agent.state.language`, and this panel, with no message parsing on the
  * frontend.
  *
- * The doc seeds the starting value with `useAgent({ initialState })`. That prop
- * does not exist on `useAgent` in @copilotkit/react-core 1.69.2, so the seed
- * lives on the server instead — `LANGUAGE_DEFAULTS`, merged per request in
- * `backend/main.py`.
+ * The page used to seed the starting value with `useAgent({ initialState })`,
+ * a prop that has never existed on the hook. It now seeds in an effect gated
+ * on `isReady`, which is a real return value of `useAgent` in
+ * @copilotkit/react-core 1.69.2 — so the published snippet finally compiles and
+ * is reproduced verbatim below.
  */
 
 type AgentState = {
@@ -26,8 +29,15 @@ type AgentState = {
 export default function Page() {
   // [1] shared state: read agent state
   // [!code highlight]
-  const { agent } = useAgent({ agentId: "sample_agent" });
-  const state = agent.state as AgentState | undefined;
+  const { agent, isReady } = useAgent({ agentId: "sample_agent" });
+  const state = (agent.state ?? {}) as Partial<AgentState>;
+
+  // [2] shared state: seed state once the agent is ready
+  // [!code highlight]
+  useEffect(() => {
+    if (!isReady || state.language !== undefined) return;
+    agent.setState({ ...(agent.state ?? {}), language: "english" });
+  }, [agent, isReady, state.language]);
 
   return (
     <DemoFrame
@@ -42,14 +52,14 @@ export default function Page() {
           <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
             Language:{" "}
             <strong className="text-[var(--accent)]">
-              {state?.language ?? "—"}
+              {state.language ?? "—"}
             </strong>
           </p>
 
           <h2 className="mt-6 text-xs font-semibold uppercase tracking-wide text-slate-500">
             Raw agent.state
           </h2>
-          {/* [2] shared state: display state */}
+          {/* [3] shared state: display state */}
           {/* [!code highlight] */}
           <pre className="mt-2 max-h-56 overflow-auto rounded-lg bg-slate-950 p-3 text-xs text-slate-100">
             {JSON.stringify(agent.state ?? {}, null, 2)}

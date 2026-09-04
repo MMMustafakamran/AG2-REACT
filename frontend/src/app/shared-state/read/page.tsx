@@ -40,18 +40,54 @@ export default function Page() {
         </div>
       </Panel>
 
-      <Callout tone="warn" title="`initialState` and `render` do not exist on useAgent">
-        Both Shared State pages seed the starting value with{" "}
-        <code>useAgent({"{ agentId, initialState }"})</code>, and this one also
-        shows a <code>render</code> prop for drawing state inside the chat. In{" "}
-        <code>@copilotkit/react-core</code> 1.69.2 <code>UseAgentProps</code>{" "}
-        accepts only <code>agentId</code>, <code>threadId</code>,{" "}
+      <Callout tone="info" title="Fixed upstream: `initialState` and `render` are gone">
+        Both Shared State pages used to seed with{" "}
+        <code>useAgent({"{ agentId, initialState }"})</code> and draw state
+        inside the chat with a <code>render</code> prop. Neither has ever
+        existed on the hook — <code>UseAgentProps</code> in{" "}
+        <code>@copilotkit/react-core</code> 1.69.2 accepts only{" "}
+        <code>agentId</code>, <code>threadId</code>,{" "}
         <code>runtimeAgentId</code>, <code>updates</code> and{" "}
-        <code>throttleMs</code> — the string <code>initialState</code> does not
-        occur anywhere in the shipped type declarations. Passing either is a type
-        error. This repo seeds the value on the server instead, with{" "}
-        <code>LANGUAGE_DEFAULTS</code> merged per request in{" "}
-        <code>backend/main.py</code>.
+        <code>throttleMs</code>. The pages now seed in a{" "}
+        <code>useEffect</code> gated on <code>isReady</code>, which{" "}
+        <em>is</em> a real return value of the shipped hook, so the snippet
+        compiles and the demo runs it as published. The server-side seed (
+        <code>LANGUAGE_DEFAULTS</code> in <code>backend/main.py</code>) stays —
+        it is what stops a re-run from reverting{" "}
+        <code>setState</code>, which is a separate defect (§5).
+      </Callout>
+
+      <Callout tone="warn" title="`isReady` does not mean the state has loaded">
+        The published seed writes <code>english</code> whenever{" "}
+        <code>state.language</code> is still undefined at the moment{" "}
+        <code>isReady</code> flips true. But <code>isReady</code> only reports
+        that the runtime <code>/info</code> sync resolved — it says nothing
+        about whether a state snapshot has arrived. On this route the backend
+        merges <code>LANGUAGE_DEFAULTS</code> per request, so the two agree and
+        the seed is harmless; on a persisted thread already holding{" "}
+        <code>spanish</code>, the same snippet races the replay and the page
+        offers no guard for it.
+      </Callout>
+
+      <Callout tone="warn" title="The new render sample blanks the whole page">
+        &quot;Rendering agent state in your app&quot; reuses the component name{" "}
+        <code>YourMainContent</code> from the step above it — the component
+        that draws the entire left pane — but its body is now{" "}
+        <code>if (!state.language) return null;</code>. Copy it in literally,
+        the way the page tells you to, and the main content disappears until the
+        first snapshot lands rather than one small line being hidden. The old{" "}
+        <code>render</code> prop failed to compile; this one compiles and
+        deletes your UI, which is the harder failure to spot. The demo keeps the
+        conditional on the single Language line, where the section&apos;s intent
+        clearly is.
+      </Callout>
+
+      <Callout tone="warn" title="Rendering state inside the chat is no longer documented">
+        The section was retitled from &quot;Rendering agent state in the
+        chat&quot; to &quot;in your app&quot;, and the in-chat option went with
+        the title. Nothing on the page now says how to put state into the
+        conversation, and no replacement page is linked — a reader who wants
+        the original behaviour is left with a removed API and no successor.
       </Callout>
 
       <Callout tone="warn" title="The backend snippet and the frontend snippet disagree">

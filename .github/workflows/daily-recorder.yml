@@ -399,9 +399,13 @@ jobs:
           RAW_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           RAW_COPILOTKIT_LICENSE_TOKEN: ${{ secrets.COPILOTKIT_LICENSE_TOKEN }}
           RAW_INTELLIGENCE_API_KEY: ${{ secrets.INTELLIGENCE_API_KEY }}
+          RAW_CPK_INTELLIGENCE_API_KEY: ${{ secrets.CPK_INTELLIGENCE_API_KEY }}
         run: |
           set -euo pipefail
-          for NAME in OPENAI_API_KEY COPILOTKIT_LICENSE_TOKEN INTELLIGENCE_API_KEY; do
+          # Both spellings of the project key are masked and re-exported. The
+          # docs renamed it to CPK_INTELLIGENCE_API_KEY; repo secrets may still
+          # hold either, and the runtime route reads whichever is set.
+          for NAME in OPENAI_API_KEY COPILOTKIT_LICENSE_TOKEN INTELLIGENCE_API_KEY CPK_INTELLIGENCE_API_KEY; do
             RAW="RAW_${NAME}"
             VALUE="$(printf '%s' "${!RAW:-}" | tr -d '\r\n')"
             [ -n "$VALUE" ] || continue

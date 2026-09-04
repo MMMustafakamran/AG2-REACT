@@ -182,7 +182,7 @@ first five commits and the doctor still had to pass.
 |---|---|---|
 | `OPENAI_API_KEY` | secret | Model provider key |
 | `COPILOTKIT_LICENSE_TOKEN` | secret | Unlocks the Rich Threads pages |
-| `INTELLIGENCE_API_KEY` | secret | Managed thread store |
+| `CPK_INTELLIGENCE_API_KEY` | secret | Managed thread store (old name `INTELLIGENCE_API_KEY` still read) |
 | `OPENAI_CHAT_MODEL_ID` | variable | Model override (default `gpt-5.4-mini`, the id every AG2 snippet names) |
 | `INTELLIGENCE_API_URL` / `INTELLIGENCE_GATEWAY_WS_URL` | variable | Endpoint overrides |
 

@@ -101,14 +101,19 @@ export default function Page() {
                 <>
                   EdDSA-signed JWT, verified <em>offline</em> against a public
                   key bundled in <code>@copilotkit/license-verifier</code>. No
-                  login, no network call.
+                  login, no network call. The Headless Threads page now states
+                  that managed project setup does <em>not</em> issue this token
+                  — see the callout below.
                 </>,
               ],
               [
-                "INTELLIGENCE_API_KEY",
+                "CPK_INTELLIGENCE_API_KEY",
                 <>
                   Project key (<code>cpk-1476_…</code>) for the managed thread
-                  store — this is what actually persists threads.
+                  store — this is what actually persists threads. The docs
+                  renamed it from <code>INTELLIGENCE_API_KEY</code> without
+                  saying whether the old name still works; the route here reads
+                  the new name first and falls back to the old one.
                 </>,
               ],
               ["INTELLIGENCE_API_URL", "Managed Intelligence REST endpoint."],
@@ -162,6 +167,20 @@ export default function Page() {
         <code>2026-09-12</code>, with limits of 200 persisted threads and 72
         hours of retention. Past expiry the status flips to{" "}
         <code>expiring</code> during the grace period and then locks the drawer.
+      </Callout>
+
+      <Callout tone="warn" title="The docs now say a managed project never issues this token">
+        Headless Threads gained a paragraph this sync:{" "}
+        &ldquo;Managed project setup does not issue{" "}
+        <code>COPILOTKIT_LICENSE_TOKEN</code>. That token is only for offline or
+        self-hosted licensing and does not replace the managed project API
+        key.&rdquo; Nothing then says what a managed-only project is supposed to
+        do about the drawer, which gates on a license status and stays locked
+        without one. The two claims are only compatible if the drawer is not
+        meant for managed projects, and no page says that. This repo happens to
+        hold a token minted by an older CLI, which is the only reason the drawer
+        unlocks here — a reader following the current pages from scratch would
+        get a permanently locked drawer and no explanation.
       </Callout>
 
       <Callout tone="warn" title="Not covered">

@@ -105,7 +105,7 @@ Then fill in `.env`:
 | `AG2_AGENT_URL`                      | no       | Where the runtime reaches the agent. Use `127.0.0.1` if `localhost` resolves to IPv6.             |
 | `NEXT_PUBLIC_AUTH_BEARER_TOKEN`      | no       | The token the provider forwards. Must match `AUTH_BEARER_TOKEN`. Belongs in `frontend/.env.local`. |
 | `COPILOTKIT_LICENSE_TOKEN`           | no       | Rich Threads only. Verified offline; no login, no network call.                                   |
-| `INTELLIGENCE_API_KEY`               | no       | Rich Threads only. The project key for the managed thread store.                                  |
+| `CPK_INTELLIGENCE_API_KEY`           | no       | Rich Threads only. The project key for the managed thread store. `INTELLIGENCE_API_KEY` still works. |
 
 `backend/.env` is read first, then a repo-root `.env`, so a single top-level file works. Next.js does not read either — frontend variables belong in `frontend/.env.local`.
 
