@@ -24,6 +24,10 @@ departing from what the pages show, so each keeps its own endpoint.
 
 from __future__ import annotations
 
+# `json` is the Readables page's own import, added on 2026-09-09 alongside the
+# `json.loads` step in all three of its Python samples.
+# [!code highlight]
+import json
 from typing import Annotated, Any
 
 from ag_ui.core import EventType, StateSnapshotEvent
@@ -149,6 +153,31 @@ def get_colleagues(context: Context) -> list[dict[str, Any]]:
 # endregion
 
 
+def _parse_readable_value(value: Any) -> Any:
+    """Undo the `JSON.stringify` `useAgentContext` applies on the way out.
+
+    The AG-UI protocol types a context value as a string, so the hook
+    stringifies anything that is not already one and the agent receives JSON
+    text rather than the object or the array. As of the 2026-09-09 sync the
+    page says so itself and rewrites all three of its Python samples to
+    `json.loads` the value first, naming the two symptoms of skipping it:
+    `colleagues[0]` yields a single character, and `isinstance(value, list)`
+    can never pass.
+
+    A value that was already a string is sent unchanged and has to survive
+    untouched, so a decode is only accepted when it produces a container.
+    `json.loads` succeeds on plain text like `123` or `true` that was never
+    encoded in the first place, and taking those results would corrupt them.
+    """
+    if not isinstance(value, str):
+        return value
+    try:
+        decoded = json.loads(value)
+    except (TypeError, ValueError):
+        return value
+    return decoded if isinstance(decoded, (dict, list)) else value
+
+
 def _read_readable(context: Context, description: str) -> Any:
     """The docs' `get_readable`, with one correction.
 
@@ -172,10 +201,14 @@ def _read_readable(context: Context, description: str) -> Any:
     there would republish every `useAgentContext` value into `agent.state` on
     the frontend and into the Inspector's state view. Dependencies are
     request-scoped and are not snapshotted. See `API_DRIFT.md` section 3.
+
+    The `json.loads` step is the page's own, added on 2026-09-09. Without it
+    `get_colleagues` returned the JSON text of the list and its `or []`
+    fallback never fired, because a non-empty string is truthy.
     """
     copilot = context.dependencies.get("copilotkit", {})
     context_items = copilot.get("context", [])
-    return next(
+    raw = next(
         (
             item.get("value")
             for item in context_items
@@ -183,6 +216,8 @@ def _read_readable(context: Context, description: str) -> Any:
         ),
         None,
     )
+    # The value is a JSON string, so parse it before use.
+    return _parse_readable_value(raw)
 
 
 def create_sample_agent(config: ModelConfig) -> Agent:
