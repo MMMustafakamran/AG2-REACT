@@ -371,4 +371,26 @@ export const PAGES = definePages([
     prompt: 'What is the weather in Berlin today?',
     waitAfterPromptMs: 4000,
   },
+  {
+    id: 'human-in-the-loop-governed-actions',
+    name: 'App Control - Governed Action Approval',
+    videoName: 'GovernedActions',
+    docPath: 'human-in-the-loop/governed-actions',
+    route: 'human-in-the-loop/governed-actions',
+    // The tool registration -- the half that makes the run stop.
+    ideFile: 'frontend/src/app/human-in-the-loop/governed-actions/demo-chat/page.tsx',
+    startLine: 113,
+    endLine: 152,
+    extraTabs: [
+      // The approval card the tool renders.
+      {
+        filePath: 'frontend/src/app/human-in-the-loop/governed-actions/demo-chat/page.tsx',
+        startLine: 46,
+        endLine: 107,
+      },
+    ],
+    prompt:
+      'Please send an invoice reminder to acme@example.com, but check with me before it goes out.',
+    waitAfterPromptMs: 6000,
+  },
 ]);
