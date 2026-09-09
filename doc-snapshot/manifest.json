@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "docsRoot": "https://docs.copilotkit.ai/ag2",
-  "syncedAt": "2026-09-04T07:58:14.799Z",
+  "syncedAt": "2026-09-09T07:58:47.091Z",
   "pages": {
     "/ag2": {
       "file": "ag2.md",
@@ -174,15 +174,15 @@
     },
     "/ag2/intelligence/quickstart": {
       "file": "ag2__intelligence__quickstart.md",
-      "sha256": "3fd05506df0c1b2d889b3952d10ee3a5b62a85112aaaa2f19978848e061f9692",
-      "bytes": 7224,
-      "lines": 160,
+      "sha256": "720c1c37c4da71881ce3da7b98a45539c2edfc368010468eaba30d2688bf605a",
+      "bytes": 7186,
+      "lines": 159,
       "routes": [
         "/intelligence/quickstart"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Fri, 04 Sep 2026 13:40:33 GMT"
+      "date": "Wed, 09 Sep 2026 07:58:47 GMT"
     },
     "/ag2/prebuilt-components": {
       "file": "ag2__prebuilt-components.md",
@@ -234,15 +234,15 @@
     },
     "/ag2/readables": {
       "file": "ag2__readables.md",
-      "sha256": "54b2650c826de8a99205ae29388d93e5d2367ab2c3ad127294b0eb8abb210e0b",
-      "bytes": 10640,
-      "lines": 239,
+      "sha256": "62300639ea855993cb08744e6dda28c5a5fd4fdf9ca7908bf98a79501d216aa9",
+      "bytes": 12164,
+      "lines": 270,
       "routes": [
         "/readables"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Mon, 31 Aug 2026 19:25:21 GMT"
+      "date": "Wed, 09 Sep 2026 07:58:47 GMT"
     },
     "/ag2/shared-state/read": {
       "file": "ag2__shared-state__read.md",
@@ -294,15 +294,15 @@
     },
     "/ag2/webmcp": {
       "file": "ag2__webmcp.md",
-      "sha256": "fba9ee0ab9d388b21da549775c978dcb48f1dc179b8a8b7081a0e797648eff49",
-      "bytes": 7476,
-      "lines": 153,
+      "sha256": "54af6703f09e323c2c76e6947cf9cf610e50327a7a614a3d0473eb9c789c9a93",
+      "bytes": 7479,
+      "lines": 165,
       "routes": [
         "/webmcp"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Fri, 04 Sep 2026 13:40:32 GMT"
+      "date": "Wed, 09 Sep 2026 07:58:47 GMT"
     }
   },
   "sitemap": {

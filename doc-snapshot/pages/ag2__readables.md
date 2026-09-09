@@ -18,6 +18,23 @@ This context can then be shared with your AG2 backend.
   CopilotKit consumes AG-UI protocol events streamed by AG2 over <code>/chat</code>. See the <a href="https://docs.ag2.ai/latest/docs/user-guide/ag-ui/" target="_blank">AG2 AG-UI integration docs</a>.
 </Callout>
 
+<Callout type="warn" title="Context values arrive as JSON strings">
+  The AG-UI protocol defines a context value as a string. Therefore
+  `useAgentContext` calls `JSON.stringify` on any `value` that is not already a
+  string, and your agent receives the JSON text instead of the object or the
+  array.
+
+  Parse the value before you read a field from it. Use `json.loads(item["value"])`
+  in Python, or `JSON.parse(item.value)` in TypeScript. If you skip the parse
+  step, an index such as `colleagues[0]` returns a single character, and a shape
+  check such as `isinstance(value, list)` can never pass.
+
+  Do not stringify the value again, because that produces double encoding. A
+  `value` that is already a string is sent unchanged, so no parse step is needed
+  for it.
+</Callout>
+
+
 <TailoredContent
     className="step"
     id="impl"
@@ -67,15 +84,20 @@ This context can then be shared with your AG2 backend.
                 <Tabs groupId="language_ag2_readables_state" items={['Python']} default="Python" persist>
                     <Tab value="Python">
                         ```python title="agent.py"
+                        import json # [!code highlight]
+
                         from autogen import ContextVariables
 
                         def get_readable(context: ContextVariables, description: str):
                             copilot = context.get("copilotkit", {})
                             context_items = copilot.get("context", [])
-                            return next(
+                            raw = next(
                                 (item.get("value") for item in context_items if item.get("description") == description),
                                 None,
                             )
+                            # [!code highlight:2]
+                            # The value is a JSON string, so parse it before use
+                            return json.loads(raw) if raw is not None else None
                         ```
                     </Tab>
                 </Tabs>
@@ -89,6 +111,8 @@ This context can then be shared with your AG2 backend.
                 <Tabs groupId="language_ag2_readables_backend" items={['Python']} default="Python" persist>
                     <Tab value="Python">
                         ```python title="agent.py"
+                        import json # [!code highlight]
+
                         from fastapi import FastAPI, Header
                         from fastapi.responses import StreamingResponse
                         from autogen import ConversableAgent, LLMConfig
@@ -98,10 +122,13 @@ This context can then be shared with your AG2 backend.
                         def get_readable(context: ContextVariables, description: str):
                             copilot = context.get("copilotkit", {})
                             context_items = copilot.get("context", [])
-                            return next(
+                            raw = next(
                                 (item.get("value") for item in context_items if item.get("description") == description),
-                                [],
+                                None,
                             )
+                            # [!code highlight:2]
+                            # The value is a JSON string, so parse it before use
+                            return json.loads(raw) if raw is not None else None
 
                         agent = ConversableAgent(
                             name="assistant",
@@ -187,6 +214,8 @@ This context can then be shared with your AG2 backend.
                 <Tabs groupId="language_ag2_readables_minimal" items={['Python']} default="Python" persist>
                     <Tab value="Python">
                         ```python title="agent.py"
+                        import json # [!code highlight]
+
                         from fastapi import FastAPI, Header
                         from fastapi.responses import StreamingResponse
                         from autogen import ConversableAgent, LLMConfig
@@ -208,7 +237,9 @@ This context can then be shared with your AG2 backend.
                                 (item for item in context_items if item.get("description") == "The current user's colleagues"),
                                 None,
                             )
-                            return entry.get("value", []) if entry else []
+                            # [!code highlight:2]
+                            # The value is a JSON string, so parse it to return a real list
+                            return json.loads(entry["value"]) if entry else []
 
                         agent.register_for_execution(name="list_colleagues")(list_colleagues)
 
