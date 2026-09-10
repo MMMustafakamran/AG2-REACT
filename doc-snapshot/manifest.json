@@ -307,7 +307,7 @@
   },
   "sitemap": {
     "fetchedAt": "2026-09-04T10:56:11.541Z",
-    "urlsUnderRoot": 142,
+    "urlsUnderRoot": 145,
     "knownUnmapped": [
       "https://docs.copilotkit.ai/ag2/agent-config",
       "https://docs.copilotkit.ai/ag2/agent-spec",
@@ -357,6 +357,7 @@
       "https://docs.copilotkit.ai/ag2/generative-ui/a2ui/dynamic-schema",
       "https://docs.copilotkit.ai/ag2/generative-ui/a2ui/fixed-schema",
       "https://docs.copilotkit.ai/ag2/generative-ui/display",
+      "https://docs.copilotkit.ai/ag2/generative-ui/frontend-cards",
       "https://docs.copilotkit.ai/ag2/generative-ui/hashbrown",
       "https://docs.copilotkit.ai/ag2/generative-ui/interactive",
       "https://docs.copilotkit.ai/ag2/generative-ui/json-render",
@@ -373,9 +374,11 @@
       "https://docs.copilotkit.ai/ag2/intelligence/headless-ui",
       "https://docs.copilotkit.ai/ag2/intelligence/intelligence-platform",
       "https://docs.copilotkit.ai/ag2/intelligence/managed-intelligence-platform",
+      "https://docs.copilotkit.ai/ag2/intelligence/memories",
       "https://docs.copilotkit.ai/ag2/intelligence/overview",
       "https://docs.copilotkit.ai/ag2/intelligence/self-hosting",
       "https://docs.copilotkit.ai/ag2/intelligence/threads-explained",
+      "https://docs.copilotkit.ai/ag2/learning",
       "https://docs.copilotkit.ai/ag2/migrate/1.10.X",
       "https://docs.copilotkit.ai/ag2/migrate/1.8.2",
       "https://docs.copilotkit.ai/ag2/migrate/v2",
