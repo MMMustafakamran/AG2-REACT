@@ -41,9 +41,11 @@ import { runReadablesAction } from './readables.action';
 import { runAuthAction } from './auth.action';
 import { runDisplayOnlyAction } from './display-only.action';
 import { runFrontendToolsAction } from './frontend-tools.action';
+import { runGovernedActionsAction } from './governed-actions.action';
 import { runHeadlessUiAction } from './headless-ui.action';
 import { runHitlAction } from './hitl.action';
 import { runInspectorAction } from './inspector.action';
+import { runIntelligenceAction } from './intelligence.action';
 import { runPrebuiltAction } from './prebuilt.action';
 import { runPrebuiltErrorAction } from './prebuilt-error.action';
 import { runProgrammaticAction } from './programmatic.action';
@@ -75,6 +77,7 @@ export const ACTION_MAP: Record<string, PageActionHandler> = {
   'tool-rendering': runToolRenderingAction,
   'state-rendering': runStateRenderingAction,
   'frontend-tools': runFrontendToolsAction,
+  'human-in-the-loop-governed-actions': runGovernedActionsAction,
   'shared-state-read': runSharedStateReadAction,
   'shared-state-write': runSharedStateWriteAction,
   readables: runReadablesAction,
@@ -82,6 +85,7 @@ export const ACTION_MAP: Record<string, PageActionHandler> = {
   'threads-drawer': runThreadsDrawerAction,
   'threads-headless': runThreadsHeadlessAction,
   'threads-lifecycle': runThreadsLifecycleAction,
+  'intelligence-quickstart': runIntelligenceAction,
   'copilot-runtime': runRuntimeAction,
   'ag-ui': runAgUiAction,
 };
