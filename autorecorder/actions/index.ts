@@ -36,14 +36,10 @@ import { type ActionContext, type PageActionHandler, type PageRecordConfig } fro
 import { runStandardAction } from '../core/actions';
 import { type Page } from 'playwright';
 
-import { runAgUiAction } from './ag-ui.action';
 import { runReadablesAction } from './readables.action';
-import { runAuthAction } from './auth.action';
-import { runDisplayOnlyAction } from './display-only.action';
 import { runFrontendToolsAction } from './frontend-tools.action';
 import { runGovernedActionsAction } from './governed-actions.action';
 import { runHeadlessUiAction } from './headless-ui.action';
-import { runHitlAction } from './hitl.action';
 import { runInspectorAction } from './inspector.action';
 import { runIntelligenceAction } from './intelligence.action';
 import { runPrebuiltAction } from './prebuilt.action';
@@ -72,8 +68,6 @@ export const ACTION_MAP: Record<string, PageActionHandler> = {
   'headless-ui': runHeadlessUiAction,
   'programmatic-control': runProgrammaticAction,
   inspector: runInspectorAction,
-  'display-only': runDisplayOnlyAction,
-  interactive: runHitlAction,
   'tool-rendering': runToolRenderingAction,
   'state-rendering': runStateRenderingAction,
   'frontend-tools': runFrontendToolsAction,
@@ -81,13 +75,11 @@ export const ACTION_MAP: Record<string, PageActionHandler> = {
   'shared-state-read': runSharedStateReadAction,
   'shared-state-write': runSharedStateWriteAction,
   readables: runReadablesAction,
-  auth: runAuthAction,
   'threads-drawer': runThreadsDrawerAction,
   'threads-headless': runThreadsHeadlessAction,
   'threads-lifecycle': runThreadsLifecycleAction,
   'intelligence-quickstart': runIntelligenceAction,
   'copilot-runtime': runRuntimeAction,
-  'ag-ui': runAgUiAction,
 };
 
 export async function executePageAction(

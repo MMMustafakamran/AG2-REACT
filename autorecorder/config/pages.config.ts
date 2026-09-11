@@ -175,6 +175,16 @@ export const PAGES = definePages([
     endLine: 55,
     prompt: 'Show me a weather card for Tokyo. It is 77 degrees and clear today.',
     waitAfterPromptMs: 4000,
+    demo: {
+      sendTimeoutMs: 12000,
+      render: {
+        selector: 'div:has-text("Tokyo"), div:has-text("77°F")',
+        last: true,
+        timeoutMs: 25000,
+        beatMs: 3500,
+      },
+      glideTo: [{ x: 960, y: 500, beatMs: 600 }],
+    },
   },
   {
     id: 'interactive',
@@ -188,6 +198,29 @@ export const PAGES = definePages([
     endLine: 64,
     prompt: 'Clear the temp cache for me by running rm -rf /tmp/cache',
     waitAfterPromptMs: 4000,
+    demo: {
+      sendTimeoutMs: 12000,
+      render: {
+        selector: 'button:has-text("Approve")',
+        timeoutMs: 20000,
+        beatMs: 1500,
+        required:
+          '[Human in the Loop] The Approve button never rendered — the approval card did not appear, so the gate was never exercised.',
+      },
+      click: {
+        selector: 'button:has-text("Approve")',
+        missing: '[Human in the Loop] The Approve button vanished before it could be clicked.',
+      },
+      checks: [
+        {
+          selector: 'button:has-text("Approve")',
+          enabled: false,
+          severity: 'warn',
+          ok: '[Human in the Loop] Approval taken and a follow-up reply arrived.',
+          message: '[Human in the Loop] Approve is still clickable after the reply — the decision may not have reached the agent.',
+        },
+      ],
+    },
   },
   {
     id: 'tool-rendering',
@@ -272,6 +305,17 @@ export const PAGES = definePages([
     endLine: 122,
     prompt: 'Quick ping: did this request come through authenticated?',
     waitAfterPromptMs: 4000,
+    demo: {
+      sendTimeoutMs: 12000,
+      before: [
+        {
+          selector:
+            'div[class*="border-emerald"], div[class*="border-amber"], div[class*="border-rose"], h2:has-text("Current configuration")',
+          offset: { x: 100, y: 40 },
+          beatMs: 2500,
+        },
+      ],
+    },
   },
   {
     id: 'threads-drawer',
@@ -348,6 +392,13 @@ export const PAGES = definePages([
     endLine: 102,
     prompt: "What's the weather in Tokyo?",
     waitAfterPromptMs: 4000,
+    demo: {
+      sendTimeoutMs: 8000,
+      glideTo: [
+        { x: 450, y: 300, beatMs: 1500 },
+        { x: 450, y: 550, beatMs: 1500 },
+      ],
+    },
   },
   {
     id: 'intelligence-quickstart',
