@@ -1,5 +1,5 @@
 import { type Page } from 'playwright';
-import { humanGlide, sleep } from '../core/overlays/cursor';
+import { beat, humanGlide, sleep } from '../core/overlays/cursor';
 import {
   closeNotepad,
   openNotepad,
@@ -39,14 +39,14 @@ export const runReadablesAction: PageActionHandler = async (
   const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 12000 });
 
   // Glide cursor over the shared context list on the left
-  await sleep(1500);
+  await beat(1500);
   const contextList = page.locator('ul, li:has-text("John Doe")').first();
   if (await contextList.isVisible({ timeout: 4000 }).catch(() => false)) {
     const clBox = await contextList.boundingBox();
     if (clBox) {
       console.log(`   🎯 Highlighted shared context list at (${Math.round(clBox.x)}, ${Math.round(clBox.y)})`);
       await humanGlide(page, clBox.x + 120, clBox.y + 40, 22);
-      await sleep(2000);
+      await beat(2000);
     }
   }
 
@@ -54,7 +54,7 @@ export const runReadablesAction: PageActionHandler = async (
   await waitForAgentResponseCompletion(page, config.waitAfterPromptMs ?? 4000, msgCount);
 
   console.log(`   [Readables] Writing the issue note in Notepad...`);
-  await sleep(1200);
+  await beat(1200);
   await openNotepad(page, 'readables-issue.txt');
   await typeInNotepad(page, buildIssueNote());
   await closeNotepad(page);

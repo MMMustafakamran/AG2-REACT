@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { type Page } from 'playwright';
 import { type PageActionHandler, type PageRecordConfig } from '../core/types';
-import { humanGlide, sleep } from '../core/overlays/cursor';
+import { beat, humanGlide, sleep } from '../core/overlays/cursor';
 import {
   closeNotepad,
   openNotepad,
@@ -119,7 +119,7 @@ export const runPrebuiltErrorAction: PageActionHandler = async (
   }
   console.log('   ✅ Build output finished replaying.');
 
-  await sleep(1400);
+  await beat(1400);
 
   // Read down the error the way a person does: that it failed, which file,
   // then the two versions that cannot meet.
@@ -128,7 +128,7 @@ export const runPrebuiltErrorAction: PageActionHandler = async (
   await restOnLine(page, 'tailwindcss v4.1.18', 2400);
 
   console.log('   [PrebuiltError] Writing the issue note in Notepad...');
-  await sleep(900);
+  await beat(900);
   await openNotepad(page, 'prebuilt-components-issue.txt');
   await typeInNotepad(page, buildIssueNote(rootPath), {
     charDelayMs: 44,
