@@ -5,6 +5,7 @@ import { executePageAction } from '../actions';
 import { diagnoseError } from './diagnostics';
 import { SELECTORS } from '../config/selectors.config';
 import { captureConsole, type ConsoleEntry } from './console-capture';
+import { buildFailureEvidence, snapshotLogOffsets, writeFailureLog, type LogSource } from './failure-evidence';
 import { generateIdeHtml, type IdeTabConfig } from './ide/generator';
 import { humanClick, humanGlide, humanScrollDown, restCursorSomewhere, sleep } from './overlays/cursor';
 import { pause, seedTake } from './overlays/human';
@@ -183,6 +184,30 @@ export class RecordingEngine {
    *
    * Returns the filename actually written, which is what the summary reports.
    */
+  /**
+   * Closes a failed take on the evidence: the diagnosed error, the browser
+   * console, and this page's slice of the server logs, written to
+   * videos/logs/<id>.error.log. This engine has no simulated terminal window,
+   * so the evidence is log-only; the clip ends on the broken page and the
+   * console notes where the log went.
+   */
+  private showFailureEvidence(
+    pageId: string,
+    error: string,
+    consoleEntries: ConsoleEntry[],
+    logs: LogSource[],
+    logsDir: string,
+  ): void {
+    try {
+      const evidence = buildFailureEvidence({ pageId, error, consoleEntries, logs });
+      const file = writeFailureLog(logsDir, evidence);
+      console.log(`   📝 Failure evidence: ${file}`);
+      console.log('   Evidence note: this recorder has no terminal window; the evidence is in the log only.');
+    } catch (e) {
+      console.warn(`   Evidence note: could not write the error log: ${e}`);
+    }
+  }
+
   private async closeStage(
     browser: Browser,
     context: BrowserContext,
@@ -398,6 +423,11 @@ export class RecordingEngine {
     let finalSavedFilename = '';
     const warnings: string[] = [];
 
+    // Where the server logs stand as this take begins. If it fails, the
+    // evidence written is this page's slice of the logs, not the whole run's.
+    const logsDir = join(this.videosDir, 'logs');
+    const logSources: LogSource[] = snapshotLogOffsets(logsDir);
+
     /** A step that renders the thing under test failed -- the video is not usable. */
     const fail = (message: string): void => {
       if (!recordError) recordError = message;
@@ -563,6 +593,15 @@ export class RecordingEngine {
       console.error(`❌ Recording error for ${config.id}:`, recordError);
     } finally {
       console_?.stop();
+
+      // A failed take leaves evidence behind: the diagnosed error, the browser
+      // console, and this page's slice of the server logs, windowed around the
+      // line that explains it, in videos/logs/<id>.error.log. Never lets an
+      // evidence problem hide the original failure.
+      if (recordError) {
+        this.showFailureEvidence(config.id, recordError, console_?.entries ?? [], logSources, logsDir);
+      }
+
       finalSavedFilename = await this.closeStage(
         browser,
         context,

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "project": "AG2-react",
+  "updatedAt": "2026-09-11",
+  "source": "Seeded from the 2026-09-11 CI package; reasons from C:/Users/QS/Desktop/Fiqros/Tested-Report.md (React Guides table, 2026-09-11)",
+  "ignoreNotes": [
+    "net::ERR_ABORTED"
+  ],
+  "pages": {
+    "prebuilt-error": {
+      "status": "pass",
+      "reason": "DISAGREES with Tested-Report (❌ Build fails: `@layer base` used with no matching `@tailwind base` (Tailwind config/version mismatch), v1.71) — review — this page deliberately records that build error, so a machine pass most likely means the failure reproduced on camera"
+    }
+  }
+}

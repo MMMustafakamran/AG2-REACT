@@ -84,6 +84,22 @@ reads it, so the CI report lists what *this run* recorded rather than every
 
 ---
 
+## When a take fails
+
+A failed take no longer leaves only a broken page behind. Before the browser
+closes, the recorder gathers what it saw: the diagnosed verdict, the browser
+console errors, and this page's slice of `videos/logs/backend.log` and `frontend.log` (from where they stood
+when the take began). Each section is windowed around the line most worth
+reading -- a traceback, an `Error`, a 4xx/5xx -- and that line is marked
+`>>`. The text is written to `videos/logs/<page-id>.error.log`, which CI
+uploads with the run, so an agent can diagnose from the log without re-running
+anything locally. This repo's engine has no simulated terminal window, so the
+evidence is log-only: the clip still ends on the broken page and the recorder
+prints a note saying where the log went.
+
+Passing takes are untouched. `core/failure-evidence.ts` holds the logic; the
+engine calls it from the `finally` of `recordPage`.
+
 ## Layout
 
 The split between what you edit and what you don't is the point of this folder.
