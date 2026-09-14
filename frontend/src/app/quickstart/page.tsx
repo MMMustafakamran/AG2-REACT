@@ -14,7 +14,7 @@ from autogen.ag_ui import AGUIStream, RunAgentInput
 agent = ConversableAgent(
     name="assistant",
     system_message="You are a helpful assistant.",
-    llm_config=LLMConfig({"model": "gpt-5.6-luna"}),
+    llm_config=LLMConfig({"model": "gpt-5.4-mini"}),
     human_input_mode="NEVER",
 )
 

@@ -90,7 +90,7 @@ export function assertPortsFree({ allowReuse = false } = {}) {
  */
 export async function assertModelCredentials() {
   // No Azure branch here, unlike the sibling repos: every AG2 doc sample builds
-  // its model with `LLMConfig({"model": "gpt-5.6-luna"})`, so OpenAI is the only
+  // its model with `LLMConfig({"model": "gpt-5.4-mini"})`, so OpenAI is the only
   // provider `backend/model_config.py` wires up.
   const openaiKey = process.env.OPENAI_API_KEY;
 
@@ -129,7 +129,7 @@ export async function assertModelCredentials() {
   // completion tells the difference up front.
   process.stdout.write('⏳ [Preflight] Verifying model balance... ');
   try {
-    const model = process.env.OPENAI_CHAT_MODEL_ID || process.env.OPENAI_MODEL || 'gpt-5.6-luna';
+    const model = process.env.OPENAI_CHAT_MODEL_ID || process.env.OPENAI_MODEL || 'gpt-5.4-mini';
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${openaiKey}`, 'Content-Type': 'application/json' },

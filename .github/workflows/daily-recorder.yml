@@ -483,7 +483,7 @@ jobs:
       # Reading and thinking pauses at 85% -- typing, mouse and scrolling are
       # not scaled. See autorecorder/core/overlays/human.ts (PACE).
       AUTORECORD_PACE: '0.85'
-      OPENAI_CHAT_MODEL_ID: ${{ vars.OPENAI_CHAT_MODEL_ID || 'gpt-5.6-luna' }}
+      OPENAI_CHAT_MODEL_ID: ${{ vars.OPENAI_CHAT_MODEL_ID || 'gpt-5.4-mini' }}
       INTELLIGENCE_API_URL: ${{ vars.INTELLIGENCE_API_URL }}
       INTELLIGENCE_GATEWAY_WS_URL: ${{ vars.INTELLIGENCE_GATEWAY_WS_URL }}
 

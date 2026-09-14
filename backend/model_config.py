@@ -2,7 +2,7 @@
 
 Every AG2 snippet in the docs builds its model inline as
 
-    llm_config=LLMConfig({"model": "gpt-5.6-luna"})
+    llm_config=LLMConfig({"model": "gpt-5.4-mini"})
 
 That constructor does not exist in any published `ag2` release (see
 `API_DRIFT.md`). The shipped equivalent in ag2 1.0.3 is `OpenAIConfig`, passed
@@ -18,7 +18,7 @@ import os
 from ag2.config import ModelConfig, OpenAIConfig
 
 # What every AG2 doc snippet passes to `LLMConfig`.
-DOCS_MODEL = "gpt-5.6-luna"
+DOCS_MODEL = "gpt-5.4-mini"
 
 
 def build_model_config() -> ModelConfig:
