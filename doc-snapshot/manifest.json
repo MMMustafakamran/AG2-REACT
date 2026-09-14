@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "docsRoot": "https://docs.copilotkit.ai/ag2",
-  "syncedAt": "2026-09-09T07:58:47.091Z",
+  "syncedAt": "2026-09-14T07:09:33.265Z",
   "pages": {
     "/ag2": {
       "file": "ag2.md",
@@ -138,15 +138,15 @@
     },
     "/ag2/headless-threads": {
       "file": "ag2__headless-threads.md",
-      "sha256": "241635692c18737b4b68c03760138df5a8943ff0483d84d77ae56fe2a15cdc78",
-      "bytes": 10479,
-      "lines": 222,
+      "sha256": "25185495de6c9df6e2bc0880beefcdcf3dbaf0f4a9cec081bc9512918f890651",
+      "bytes": 11675,
+      "lines": 249,
       "routes": [
         "/headless-threads"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
+      "date": "Mon, 14 Sep 2026 07:09:33 GMT"
     },
     "/ag2/human-in-the-loop/governed-actions": {
       "file": "ag2__human-in-the-loop__governed-actions.md",
@@ -162,27 +162,27 @@
     },
     "/ag2/inspector": {
       "file": "ag2__inspector.md",
-      "sha256": "a0bceecc75c9bbbe4eb3f554f9eb13e6f72a0966a457f1f8e05e46319095cbe3",
-      "bytes": 5960,
-      "lines": 127,
+      "sha256": "3a105e82818aa2b92b8c098922d8efd78c1634d17a9831977a67182092e6c66a",
+      "bytes": 9499,
+      "lines": 188,
       "routes": [
         "/inspector"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Fri, 04 Sep 2026 07:58:14 GMT"
+      "date": "Mon, 14 Sep 2026 07:09:33 GMT"
     },
     "/ag2/intelligence/quickstart": {
       "file": "ag2__intelligence__quickstart.md",
-      "sha256": "720c1c37c4da71881ce3da7b98a45539c2edfc368010468eaba30d2688bf605a",
-      "bytes": 7186,
-      "lines": 159,
+      "sha256": "b61f89da359500dfe7d17939572febb3e7a5a35edbbbc55de1f8713cd92f0a54",
+      "bytes": 5989,
+      "lines": 157,
       "routes": [
         "/intelligence/quickstart"
       ],
       "status": "ok",
       "age": 0,
-      "date": "Wed, 09 Sep 2026 07:58:47 GMT"
+      "date": "Mon, 14 Sep 2026 07:09:33 GMT"
     },
     "/ag2/prebuilt-components": {
       "file": "ag2__prebuilt-components.md",
